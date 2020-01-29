@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- ATTENTION ON EST DANS head -->
+    <!-- ON VA METTRE DANS FICHIER style.css LE CODE COMMUN A TOUTES LES PAGES -->
+    <link rel="stylesheet" href="style.css">
+    <!-- ON METTRA DANS LA BALISE style LE CODE CSS QUI S'APPLIQUE SEULEMENT A CETTE PAGE -->
+    <style>          
+h1 {
+    border:1px solid orange;
+}
+
+main a {
+    background-color:yellow;
+}
+    </style>
+</head>
+<body>
+    <!-- ENTETE : PARTIE COMMUNE A L'ENSEMBLE DES PAGES DU SITE -->
+    <header>
+        <h1>ACCUEIL</h1>
+        <nav>
+            <a href="accueil.html">accueil</a>
+            <a href="services.html">services</a>
+            <a href="contact.html">contactez-nous</a>
+        </nav>
+    </header>
+    <!-- MAIN: CONTENU PRINCIPAL DE CETTE PAGE (DIFFERENT POUR CHAQUE PAGE) -->
+    <main>
+        <section class="partie1">
+            <img src="photo1.jpg" alt="la description pour les malvoyants">
+            <h2>CONTENU DE LA PAGE D'ACCUEIL</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo nostrum asperiores ipsa dolorum voluptates, nam placeat odio voluptatem doloribus amet debitis, exercitationem iste rerum doloremque consequatur sit obcaecati repellat vero.</p>
+            <p>POUR NOUS CONTACTER: <a href="contact.html">CLIQUER ICI</a></p>
+        </section>
+
+        <section class="partie2">
+            <h2>EXEMPLE DE MISE EN PAGE AVEC DES COLONNES</h2>
+            <div class="container"><!-- CONTAINER-->
+                <div>
+                    <h3>colonne1</h3>
+                    <img src="photo1.jpg" alt="la description pour les malvoyants">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+                <div>
+                    <h3>colonne2</h3>
+                    <img src="photo2.jpg" alt="la description pour les malvoyants">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+                <div>
+                    <h3>colonne2</h3>
+                    <img src="photo3.jpg" alt="la description pour les malvoyants">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+                <div>
+                    <h3>colonne4</h3>
+                    <img src="photo4.jpg" alt="la description pour les malvoyants">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+            </div><!-- CONTAINER-->
+        </section>
+
+        <section class="partie3">
+            <h2>EXEMPLE DE MISE EN PAGE AVEC DES COLONNES</h2>
+            <div class="container"><!-- CONTAINER-->
+                <div>
+                    <img src="photo1.jpg" alt="la description pour les malvoyants">
+                    <h3>colonne1</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+                <div>
+                    <img src="photo1.jpg" alt="la description pour les malvoyants">
+                    <h3>colonne2</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+                <div>
+                    <img src="photo1.jpg" alt="la description pour les malvoyants">
+                    <h3>colonne2</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+            </div><!-- CONTAINER-->
+        </section>
+
+        <sect>
+
+        <section>
+            <h2>EXEMPLE DE MISE EN PAGE AVEC DES COLONNES</h2>
+            <div class="container"><!-- CONTAINER-->
+                <div>
+                    <h3>colonne1</h3>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, dignissimos quae unde dicta nam tempora harum, quisquam maxime autem expedita quis porro ab molestias aut! Illum architecto consectetur natus nulla!</p>
+                </div>
+            </div><!-- CONTAINER-->
+        </section>
+
+
+    </main>
+    <!-- PIED DE PAGE : PARTIE COMMUNE A L'ENSEMBLE DES PAGES DU SITE -->
+    <footer>
+        <p>tous droits réservés</p>
+    </footer>
+</body>
+</html>

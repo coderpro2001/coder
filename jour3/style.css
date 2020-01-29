@@ -1,0 +1,52 @@
+html, body {
+    width:100%;
+    padding:0;
+    margin:0;
+}
+
+img {
+    width:100%;
+    max-width:100%;
+    max-height:300px;
+    object-fit:cover;
+}
+
+a        
+{
+    border:1px solid red;
+    padding:16px;
+    text-decoration: none;
+    color:blue;
+}    
+
+/* EN CSS .container EST ASSOCIE AUX BALISES QUI ONT L'ATTRIBUT class="container" */
+.container {
+    display:flex;
+    justify-content: space-between;
+}
+
+/* 
+JE VEUX SELECTIONNER LES BALISES img 
+QUI SONT ENFANTS D'UNE BALISE 
+AVEC L'ATTRIBUT CLASS container
+*/
+.container img {
+    width:200px;
+    height:200px;
+}
+
+.partie2, .partie3 {
+    padding:16px;
+}
+
+.partie1 {
+    background-color: yellowgreen;
+}
+
+.partie2 {
+    background-color: lightblue;
+}
+
+.partie3 {
+    background-color: coral;
+}
