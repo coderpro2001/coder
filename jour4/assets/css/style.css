@@ -1,0 +1,39 @@
+/* RESET CSS POUR INITIALISER LE RENDU DE LA PAGE */
+html, body {
+    margin:0;
+    padding:0;
+    widows: 100%;
+    height:100%;
+    font-size:16px;
+}
+
+/* ON SELECTIONNE LES BALISES a QUI SONT ENFANTS DE LA BALISE nav */
+nav a {
+    border: 1px solid #0000FF;
+    text-decoration: none;
+    padding:1rem;
+}
+
+h1 {
+    color:orange;
+}
+
+img {
+    max-width:100%;
+}
+
+.ligne {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ligne div {
+    padding:10px;
+}
+
+/* SELECTIONNE LA BALISE HTML AVEC l'ATTRIBUT class="photo1" */
+.photo1 {
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
