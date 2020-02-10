@@ -8,6 +8,12 @@ $classeBody = "index";
 $age        = 20;
 $nomAuteur  = "pauline";
 $licence    = "tous droits réservés";
+$title      = "MON CV EN LIGNE";
+$titre2     = "MES COMPETENCES EN DEV FULLSTACK";
+
+$testFront  = false;
+$testBack   = true;
+$villeResidence = "Marseille";
 
 // JE POURRAI CONTINER A UTILISER MES VARIABLES 
 // DANS LES AUTRES FICHIERS PHP ASSEMBLES AVEC require_once
