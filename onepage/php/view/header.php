@@ -8,7 +8,7 @@
 </head>
 <body class="<?php echo $classeBody ?>">
     <header>
-    <h1><?php echo $titrePage ?></h1>
+        <h1><?php echo $titrePage ?></h1>
     </header>
     <main>
 

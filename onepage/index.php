@@ -11,8 +11,8 @@ $licence    = "tous droits réservés";
 $title      = "MON CV EN LIGNE";
 $titre2     = "MES COMPETENCES EN DEV FULLSTACK";
 
-$testFront  = false;
-$testBack   = true;
+$testFront      = false;
+$testBack       = true;
 $villeResidence = "Marseille";
 
 // JE POURRAI CONTINER A UTILISER MES VARIABLES 
