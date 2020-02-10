@@ -36,7 +36,7 @@ header:hover {
 
 nav a {
     font-size:12px;
-    transition: all 0.5s linear;
+    transition: all 0.25s linear;
     text-decoration: none; /* ENLEVER LE SOULIGNE SUR LE TEXTE */
     border: 1px solid orange;
     padding: 8px; /* ESPACE VIDE ENTRE LE TEXTE ET LA BORDURE */
@@ -79,6 +79,7 @@ p:hover {
 #s1 h2 {
     color:orange;
     text-align:center;
+    text-shadow: 1px 2px 4px #ffaaaa;
 }
 
 #s1 p {
