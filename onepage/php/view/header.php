@@ -11,6 +11,8 @@ html, body {
     height:100%;
     font-size:16px;
     box-sizing: border-box;
+    padding:0;
+    margin:0;
 }
 /* SI ON VEUT CONTROLER LA HAUTEUR height */
 section {
@@ -41,22 +43,24 @@ header:hover {
     background-color: #ffffff;
 }
 
-nav a {
+header nav a {
     font-size:12px;
     transition: all 0.25s linear;
     text-decoration: none; /* ENLEVER LE SOULIGNE SUR LE TEXTE */
     border: 1px solid orange;
     padding: 8px; /* ESPACE VIDE ENTRE LE TEXTE ET LA BORDURE */
     border-radius:16px;
-    box-shadow: 1px 2px 3px #000000;
+    box-shadow: 1px 2px 3px #666666;
 }
 
 nav a:hover {
     color: red;
     /* font-size:16px; */
     background-color:rgb(255, 255, 255);
-    /* transform:rotate(-400deg); */
+    /* 
+    transform:rotate(-400deg); 
     display:inline-block;
+    */
     box-shadow: none;
 }
 
@@ -121,12 +125,12 @@ header {
 header h1 {
     margin:0;
     padding: 0 10px;
-    font-size:2rem;
+    font-size:1.2rem;
 }
 
     </style>
 </head>
-<body class="<?php echo $classeBody ?>">
+<body class="<?php echo $classeBody ?? "" ?>">
     <header>
         <h1><?php echo $titrePage ?? "cv développeur fullstack" ?></h1>
         <nav>
