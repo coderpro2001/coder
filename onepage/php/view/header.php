@@ -96,7 +96,7 @@ p:hover {
 .container {
     display:flex;
     width:100%;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    /* VA A LA LIGNE SI UNE LIGNE NE SUFFIT PAS */
 }
 
 /* JE SELECTIONNE LES IMAGES QUI SONT ENFANTS DE LA BALISE AVEC LA CLASSE container */
