@@ -90,6 +90,24 @@ p:hover {
     display:block;
     margin:0 auto;
 }
+
+/* FLEX POUR FAIRE UNE LIGNE */
+/* JE SELECTIONNE LA BALISE QUI A LA CLASSE container */
+.container {
+    display:flex;
+    width:100%;
+    flex-wrap: wrap;
+}
+
+/* JE SELECTIONNE LES IMAGES QUI SONT ENFANTS DE LA BALISE AVEC LA CLASSE container */
+.container img {
+    margin:10px;
+    max-width:100%;
+    width: calc(100% / 3 - 20px);  /* PRATIQUE POUR LES DIVISIONS AVEC VIRGULE */
+    object-fit: cover;
+    height:300px;
+}
+
     </style>
 </head>
 <body class="<?php echo $classeBody ?>">
