@@ -10,9 +10,11 @@ html, body {
     width:100%;
     height:100%;
     font-size:16px;
-    box-sizing: border-box;
     padding:0;
     margin:0;
+}
+* {
+    box-sizing: border-box;
 }
 /* SI ON VEUT CONTROLER LA HAUTEUR height */
 section {
@@ -85,6 +87,7 @@ p:hover {
 #s1 {
     background-image: url('assets/img/bureau.jpg');
     background-size: cover;
+    background-attachment: fixed; 
 }
 
 #s1 h2 {
@@ -116,7 +119,7 @@ p:hover {
     max-width:100%;
     width: calc(100% / 3 - 20px);  /* PRATIQUE POUR LES DIVISIONS AVEC VIRGULE */
     object-fit: cover;
-    height:300px;
+    height:200px;
 }
 
 header {
@@ -126,6 +129,11 @@ header h1 {
     margin:0;
     padding: 0 10px;
     font-size:1.2rem;
+}
+
+.container p {
+    width:calc( 100% / 3);
+    color:white;
 }
 
     </style>

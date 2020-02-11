@@ -33,7 +33,7 @@ while ($i < count($tableau))
  
 CODEHTML;    
 
-    $i++;
+    $i++; // PAREIL QUE $i = $i + 1;
 }
 */
 
@@ -71,7 +71,11 @@ CODEHTML;
 
     <section id="s2">
         <h2>Expériences</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
+        </div>
     </section>
 
     <section id="s3">
