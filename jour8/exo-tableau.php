@@ -14,5 +14,12 @@ echo $tableau[2];
 echo "<h3>POUR COMPTER LE NOMBRE D'ELEMENTS</h3>";
 echo count($tableau);
 
+
+$tableau[] = "jose";
+
+echo "<h3>POUR COMPTER LE NOMBRE D'ELEMENTS (APRES AJOUT)</h3>";
+echo count($tableau);
+
+
 // SIMPLIFICATION: LA FIN DU FICHIER SERT DE BALISE FERMANTE POUR PHP
 ?>
