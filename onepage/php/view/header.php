@@ -6,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>titre cv</title>
     <style>
-
+html, body {
+    width:100%;
+    height:100%;
+    font-size:16px;
+    box-sizing: border-box;
+}
 /* SI ON VEUT CONTROLER LA HAUTEUR height */
 section {
+    width:100%;
     min-height:100vh; /* vh HAUTEUR DE L'ECRAN 100vh => 100% */
     padding-top: 80px;
+    background-color: #cccccc;
 }
 
 /* SI ON VEUT QUE LE MENU SOIT TOUT LE TEMPS VISIBLE */
@@ -18,11 +25,10 @@ header {
     position:fixed; /* NE PAS OUBLIER LES COORDONNEES top ET left */
     top:0;
     left:0;
-    background-color: rgba(200, 200, 200, 0.9); /* TRANSPARENCE POUR VOIR LE FOND */
+    background-color: rgba(250, 250, 250, 1); /* TRANSPARENCE POUR VOIR LE FOND */
     width:100%;
-    padding:16px;
-    opacity:0.5;
-    height:30px;
+    padding:8px;
+    opacity:1;
     transition: all 0.5s linear;
 } 
 
@@ -31,7 +37,8 @@ header {
 
 header:hover {
     opacity:1;
-    height:60px;
+    padding-top:20px;
+    background-color: #ffffff;
 }
 
 nav a {
@@ -108,18 +115,27 @@ p:hover {
     height:300px;
 }
 
+header {
+    display:flex;
+}
+header h1 {
+    margin:0;
+    padding: 0 10px;
+    font-size:2rem;
+}
+
     </style>
 </head>
 <body class="<?php echo $classeBody ?>">
     <header>
-        <h1><?php echo $titrePage ?? "" ?></h1>
+        <h1><?php echo $titrePage ?? "cv développeur fullstack" ?></h1>
         <nav>
             <!-- POUR ALLER SUR UNE ANCRE ON UTILISE LE SELECTEUR # -->
-            <a href="#s1">section1</a>
-            <a href="#s2">section2</a>
-            <a href="#s3">section3</a>
-            <a href="#s4">section4</a>
-            <a href="#s5">section5</a>
+            <a href="#s1">compétences</a>
+            <a href="#s2">expériences</a>
+            <a href="#s3">formation</a>
+            <a href="#s4">divers</a>
+            <a href="#s5">contact</a>
         </nav>
     </header>
     <main id="haut">
