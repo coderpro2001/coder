@@ -66,8 +66,13 @@ nav a:hover {
     box-shadow: none;
 }
 
-p:hover {
-    border:1px solid green;
+p {
+    padding:0.5rem;
+}
+
+.container p:hover {
+    background-color:#ffffff;
+    color:#000000;
 }
 
 .revenir {
