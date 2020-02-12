@@ -92,10 +92,21 @@ CODEHTML;
         <h2>Contact</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
 
-        <form action="url-qui-recoit-les-infos.php" method="GET">
+        <!-- 
+            JE METS action="index.php#s5" POUR RESTER SUR LA MEME PAGE
+            ET REVENIR SUR L'ANCRE #s5
+            (note: les ancres utilisent l'attribut id="s5" ... pas de class)
+            simplification si on met action="#s5"
+            => On reste sur la même page
+        -->
+        <form action="#s5" method="GET">
             <input type="text" name="nom" placeholder="entrez votre nom" required>(*)
             <input type="email" name="email" placeholder="entrez votre email"required>(*)
             <textarea name="message" cols="60" rows="8" maxlength="1000" placeholder="entrez votre message" required></textarea>
             <button type="submit">envoyer votre message</button>
+            <div>
+                <!-- ICI ON VEUT VOIR LE MESSAGE DE CONFIRMATION -->
+                <?php require_once "php/controller/traitement-contact.php" ?>
+            </div>
         </form>
     </section>
