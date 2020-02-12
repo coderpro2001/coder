@@ -96,6 +96,13 @@ CODEHTML;
             JE METS action="index.php#s5" POUR RESTER SUR LA MEME PAGE
             ET REVENIR SUR L'ANCRE #s5
             (note: les ancres utilisent l'attribut id="s5" ... pas de class)
+
+            <a href="index.php#s5">lien vers la section</a>
+            ...
+            <section id="s5" class="toto">
+                ...
+            </section>
+
             simplification si on met action="#s5"
             => On reste sur la même page
         -->
