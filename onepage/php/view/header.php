@@ -141,6 +141,20 @@ header h1 {
     color:white;
 }
 
+
+/* formulaires */
+form {
+    display:flex;
+    flex-direction: column;
+    padding:1rem;
+}
+
+form input, form textarea, form button {
+    padding:0.5rem;
+    font-family:monospace;
+    margin:0.25rem;
+    max-width:640px;
+}
     </style>
 </head>
 <body class="<?php echo $classeBody ?? "" ?>">
