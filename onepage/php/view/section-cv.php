@@ -91,4 +91,11 @@ CODEHTML;
     <section id="s5">
         <h2>Contact</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores in eum modi vel culpa quo repellendus, iste eligendi fuga aspernatur, veniam sapiente, ducimus saepe delectus! Similique harum unde est.</p>
+
+        <form action="url-qui-recoit-les-infos.php" method="GET">
+            <input type="text" name="nom" placeholder="entrez votre nom" required>(*)
+            <input type="email" name="email" placeholder="entrez votre email"required>(*)
+            <textarea name="message" cols="60" rows="8" maxlength="1000" placeholder="entrez votre message" required></textarea>
+            <button type="submit">envoyer votre message</button>
+        </form>
     </section>
