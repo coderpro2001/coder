@@ -287,4 +287,9 @@ Contraintes :
 - votre script doit faire appel à une ressource externe (un fichier)
 - votre code JS doit être correctement indenté et commenté
 
+Ressources :
+
+- la méthode getElementById() : [https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById](https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById)
+- la méthode querySelector() : [https://developer.mozilla.org/fr/docs/Web/API/Document/querySelector](https://developer.mozilla.org/fr/docs/Web/API/Document/querySelector)
+
 # Enjoy
