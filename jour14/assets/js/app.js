@@ -108,7 +108,7 @@ console.log(john.age);
 // tableau d'objets
 const users = [
   {
-    id: 1,
+    id: "1",
     name: "Leanne Graham",
     username: "Bret",
     email: "Sincere@april.biz",
