@@ -59,6 +59,9 @@ CODESQL;
     // https://www.php.net/manual/fr/pdo.construct.php
     $pdo = new PDO("mysql:dbname=vitrine;host=localhost;charset=utf8;", "root", "" );
 
+    // CODE FACILE MAIS PAS ASSEZ SECURISE
+    // => ON VA FAIRE UN CODE PLUS COMPLIQUE ENSUITE
+    
     // ICI ON ENREGISTRE LES INFOS DANS LA TABLE SQL contact
     // https://www.php.net/manual/fr/pdo.exec.php
     $pdo->exec($requeteSQL);
