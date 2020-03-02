@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=², initial-scale=1.0">
     <title>Document</title>
-
+    <!-- CHARGE LE CODE CSS AVEC LA PAGE HTML -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
-        <h1><?php echo $titre1 ?? "TITRE DE LA PAGE" ?></h1>
+        <h1>CONCESSIONNAIRE DE TOYOTO</h1>
         <nav>
             <a href="index.php">accueil</a>
-            <a href="produits.php">mes produits</a>
-            <a href="contact.php">contactez-nous</a>
+            <a href="catalogue.php">catalogue</a>
+            <a href="contact.php">contact</a>
         </nav>
     </header>
     <main>
+
