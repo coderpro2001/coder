@@ -16,6 +16,28 @@ form {
     flex-direction: column;
 }
 
+/*
+
+
+<form>
+
+    <label>
+        <div>votre nom</div>
+        <input name="nom">
+    </label>
+
+</form>
+
+form > * 
+=> JE SELECTIONNE SEULEMENT LES ENFANTS DIRECTS
+=> label
+
+form *  
+=> JE SELECTIONNE TOUS LES ENFANTS ET AUSSI PETITS ENFANTS
+=> label ET div ET input
+
+*/
+
 form > * {
     padding:0.5rem;
     margin:0.5rem;
