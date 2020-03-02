@@ -1,3 +1,12 @@
 img {
     max-width:100%;
 }
+
+.container {
+    display: flex;
+    width:100%;
+}
+
+.container img {
+    width:calc(100% / 3);
+}
