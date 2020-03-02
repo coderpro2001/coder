@@ -9,7 +9,9 @@
 
 // JE DEMANDE A PHP DE RECUPERER LA LISTE DES FICHIERS QUI COMMENCE PAR galerie
 
-$listeGalerie = glob("assets/img/galerie*.jpg");
+// $listeGalerie = glob("assets/img/galerie*.jpg");
+$listeGalerie = glob("assets/img/galerie*.{jpg,jpeg,gif,png}", GLOB_BRACE);
+
 foreach($listeGalerie as $image)
 {
     echo 
