@@ -31,9 +31,9 @@ if (count($_REQUEST) > 0)
     // echo "SCENARIO1: FORMULAIRE ENVOYE";
     // IL FAUT RECUPERER LES INFOS DU FORMULAIRE
     // <input name="nom">
-    $nom = $_REQUEST["nom"];
-    $email = $_REQUEST["email"];
-    $message = $_REQUEST["message"];
+    $nom        = $_REQUEST["nom"];
+    $email      = $_REQUEST["email"];
+    $message    = $_REQUEST["message"];
 
     // DEBUG
     echo "merci de votre message $nom ($email)";
@@ -61,7 +61,7 @@ CODESQL;
 
     // CODE FACILE MAIS PAS ASSEZ SECURISE
     // => ON VA FAIRE UN CODE PLUS COMPLIQUE ENSUITE
-    
+
     // ICI ON ENREGISTRE LES INFOS DANS LA TABLE SQL contact
     // https://www.php.net/manual/fr/pdo.exec.php
     $pdo->exec($requeteSQL);
