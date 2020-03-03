@@ -60,6 +60,32 @@
 ## ON PEUT ALLER CODER EN HTML, CSS, JS, PHP, SQL...
 
 
+    blog
+    ├── README.md
+    ├── assets
+    │   ├── css
+    │   │   └── style.css      
+    │   ├── img
+    │   │   ├── photo-foot.jpg 
+    │   │   ├── photo-pol.jpg  
+    │   │   ├── photo-virus.jpg
+    │   │   └── photo1.jpg
+    │   └── js
+    │       └── app.js
+    ├── contact.php
+    ├── index.php
+    ├── news.php
+    └── php
+        ├── controller
+        ├── model
+        │   └── blog.sql
+        └── view
+            ├── footer.php
+            ├── header.php
+            ├── section-contact.php
+            ├── section-index.php
+            └── section-news.php
+
 
 
 
