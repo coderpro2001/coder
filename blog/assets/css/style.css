@@ -1,20 +1,52 @@
-h1 {
-    color:red;
+html, body {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    font-size:16px; /* => 1rem */
 }
 
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    color:red;
+    text-align:center;
+}
+h2 {
+    text-align:center;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav a {
+    display: inline-block;
+    text-decoration: none;
+    padding:1rem;
+    border:1px solid #cccccc;
+}
 .listeArticle {
     display:flex;
     flex-wrap: wrap;
     width:100%;
 }
 
+/* REGLE GENERALE */
 .listeArticle article {
-    width: calc( 100% / 3);
-    order:10;
+    margin:0.5rem;
+    width: calc( 100% / 3 - 1rem);
+    order:10;   /* POUR CHOISIR L'ORDRE D'AFFICHAGE DES ELEMENTS */
 }
 
+/* EXCEPTION: JE DONNE LA PRIORITE AUX ARTICLES DANS LA CATEGORIE SPORT */
 article.sport {
-    order:1;
+    order:1; /* POUR CHOISIR L'ORDRE D'AFFICHAGE DES ELEMENTS */
     width: 100%;
 }
 
