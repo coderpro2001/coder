@@ -11,44 +11,7 @@
         <input type="text" name="categorie" required placeholder="entrez la catégorie">
         <button type="submit">PUBLIER L'ARTICLE</button>
         <div class="confirmation">
-<?php
-// TRAITEMENT DU FORMULAIRE DE CREATION D'ARTICLE
-if (count($_REQUEST) > 0)
-{
-    // DEBUG
-    // echo "JE DOIS TRAITER LE FORMULAIRE";
-
-    // $_REQUEST EST UN TABLEAU ASSOCIATIF
-
-    // ETAPE1: RECUPERER LES INFOS DU FORMULAIRE
-    $titre           = $_REQUEST["titre"];
-    $contenu         = $_REQUEST["contenu"];
-    $image           = $_REQUEST["image"];
-    $datePublication = $_REQUEST["datePublication"];
-    $categorie       = $_REQUEST["categorie"];
-
-    // ETAPE2: ON VA CONSTRUIRE LA REQUETE SQL INSERT
-    $requeteSQL   =
-<<<CODESQL
-
-INSERT INTO articles
-( titre, contenu, image, datePublication, categorie)
-VALUES
-( '$titre', '$contenu', '$image', '$datePublication', '$categorie') 
-
-CODESQL;
-
-    $tabAssoColonneValeur = [];
-
-    // ETAPE3: ON VA ENVOYER LA REQUETE SQL 
-    // JE CHARGE LE CODE PHP POUR ENVOYER LA REQUETE
-    require_once "php/model/envoyer-sql.php";
-
-    // MESSAGE DE CONFRFIRMATION
-    echo "VOTRE ARTICLE A ETE PUBLIE";
-}
-
-?>
+            <?php require_once "php/controller/form-articles.php" ?>
         </div>
     </form>
 </section>

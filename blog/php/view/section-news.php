@@ -57,13 +57,17 @@ $tabLigne = $pdoStatement->fetchAll();
 // ON FAIT UNE BOUCLE POUR AFFICHER CHAQUE ARTICLE
 foreach($tabLigne as $tabAsso)
 {
+    /*
     $id         = $tabAsso["id"];
     $titre      = $tabAsso["titre"];
     $contenu    = $tabAsso["contenu"];
     $image      = $tabAsso["image"];
     $categorie  = $tabAsso["categorie"];
-
-    // ... 
+    */
+    // SIMPLIFICATION
+    // https://www.php.net/manual/fr/function.extract.php
+    // extract CREE DES VARIABLES A PARTIR DES CLES DU TABLEAU ASSOCIATIF
+    extract($tabAsso); 
 
     echo
 <<<CODEHTML
