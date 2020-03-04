@@ -54,6 +54,7 @@ require_once "php/model/envoyer-sql.php";
 // https://www.php.net/manual/fr/pdostatement.fetchall.php
 $tabLigne = $pdoStatement->fetchAll();
 
+// ON FAIT UNE BOUCLE POUR AFFICHER CHAQUE ARTICLE
 foreach($tabLigne as $tabAsso)
 {
     $id         = $tabAsso["id"];
