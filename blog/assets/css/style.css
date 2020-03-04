@@ -55,3 +55,18 @@ article img {
     height:30vh;
     object-fit:cover;
 }
+
+
+footer {
+    text-align: center;
+    padding:2rem;
+}
+
+.admin {
+    display: flex;
+    flex-direction: column;
+}
+.admin > * {
+    margin:0.25rem;
+    padding:0.25rem;
+}
