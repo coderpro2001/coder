@@ -35,8 +35,6 @@ $tabLigne = [
 */
 
 // POUR RECUPERER LES INFOS DE SQL
-// ETAPE1: CONNECTER PHP A SQL
-$pdo = new PDO("mysql:host=localhost;dbname=blog;charset=utf8;", "root", "");
 // ETAPE2: LANCER UNE REQUETE SQL EN LECTURE
 $requeteSQL =
 <<<CODESQL
@@ -46,9 +44,11 @@ ORDER BY datePublication DESC
 
 CODESQL;
 
-// https://www.php.net/manual/fr/pdo.query.php
-// PDOStatement EST UN CONTAINER QUI ENGLOBE LES RESULTATS DE LA REQUETE SQL
-$pdoStatement = $pdo->query($requeteSQL);
+
+$tabAssoColonneValeur = [];
+
+// JE CHARGE LE CODE PHP POUR ENVOYER LA REQUETE
+require_once "php/model/envoyer-sql.php";
 
 // ETAPE3: JE RECUPERE MON TABLEAU DE RESULTATS
 // https://www.php.net/manual/fr/pdostatement.fetchall.php

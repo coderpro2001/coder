@@ -38,13 +38,11 @@ VALUES
 
 CODESQL;
 
+    $tabAssoColonneValeur = [];
 
     // ETAPE3: ON VA ENVOYER LA REQUETE SQL 
-    // POUR INSERER UNE NOUVELLE LIGNE DANS LA TABLE artciles
-    // CONNEXION A LA LA DATABASE
-    $pdo = new PDO("mysql:host=localhost;dbname=blog;charset=utf8", "root", "");
-    // ENVOYER LA REQUETE
-    $pdo->exec($requeteSQL);
+    // JE CHARGE LE CODE PHP POUR ENVOYER LA REQUETE
+    require_once "php/model/envoyer-sql.php";
 
     // MESSAGE DE CONFRFIRMATION
     echo "VOTRE ARTICLE A ETE PUBLIE";
