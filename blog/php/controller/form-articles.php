@@ -58,7 +58,7 @@ CODESQL;
     // JE CHARGE LE CODE PHP POUR ENVOYER LA REQUETE
     require_once "php/model/envoyer-sql.php";
 
-    // MESSAGE DE CONFRFIRMATION
+    // MESSAGE DE CONFIRMATION
     echo "VOTRE ARTICLE A ETE PUBLIE ($requeteSQL)";
 }
 
