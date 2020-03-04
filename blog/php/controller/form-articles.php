@@ -28,6 +28,10 @@ if (count($_REQUEST) > 0)
         "categorie"        => $categorie,
     ];
     */
+
+    // CONSEIL: UTILISER LES MEMES NOMS PARTOUT
+    // "nom de la colonne SQL" => $_REQUEST["attribut name HTML"]
+    
     $tabAssoColonneValeur = [
         "titre"            => $_REQUEST["titre"],
         "contenu"          => $_REQUEST["contenu"],
