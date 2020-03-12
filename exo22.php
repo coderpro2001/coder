@@ -138,6 +138,8 @@ $produit = multiplier([ 1, 2, 3, 4 ]);
 
 echo "<h1>LE PRODUIT EST $produit</h1>";
 
+    // EXO 7
+    echo "<h1>--- EXO 7</h1>";
 
 
 // CREER UNE FONCTION QUI COMPTE LE NOMBRE DE VALEURS PAIRES DANS UN TABLEAU DE NOMBRE
@@ -191,6 +193,7 @@ echo "<h1>LE PRODUIT EST $produit</h1>";
 
 
     // EXO 8
+    echo "<h1>--- EXO 8</h1>";
 
     // ETAPE1: DECLARATION
     // ATTENTION: LA FONCTION NE PREND QU'UN SEUL PARAMETRE
@@ -237,6 +240,7 @@ echo "<h1>LE PRODUIT EST $produit</h1>";
     // TABLEAU ORDONNE
     // INDICE 0 => VALEUR 'a'
     // INDICE 1 => VALEUR 'b'
+    // ...
 
     echo "<h1>LE RESULTAT EST $texteConcatene</h1>";
 
