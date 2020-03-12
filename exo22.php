@@ -136,7 +136,7 @@ function multiplier ($tabNombre)
 
 $produit = multiplier([ 1, 2, 3, 4 ]);
 
-echo "<h1>LE PRODUIT EST $produit</h1>";
+echo "<h1>LE PRODUIT EST {$produit}m²</h1>";
 
     // EXO 7
     echo "<h1>--- EXO 7</h1>";
