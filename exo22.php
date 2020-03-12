@@ -76,3 +76,71 @@ $somme = additionner([ 3, 6, 7, 8 ]);   // 24
 
 echo "<h1>LE RESULTAT EST $somme</h1>";
 
+
+// ON FAIT UNE FONCTION ADDITIONNER MAIS AVEC UNE BOUCLE FOR
+
+function ajouterFor ($tabNombre)
+{
+    // AJOUTER LE CODE AVEC UNE BOUCLE FOR
+    // JE METS LA PREMIERE VALEUR DANS LE RESULTAT
+    $somme = $tabNombre[0];
+    // ET ENSUITE, JE PARCOURS LES AUTRES VALEURS DU TABLEAU
+    // A PARTIR DE LA 2E VALEUR (indice = 1)
+    // JUSQU'A LA DERNIER VALEUR (indice = )
+    for($i=1; $i < count($tabNombre); $i = $i +1)
+    {
+        echo "(indice=$i)";
+        $somme += $tabNombre[$i];    
+    }
+
+    return $somme;
+}
+
+$somme = ajouterFor([ 3, 6, 7, 8 ]);   // 24
+
+echo "<h1>LE RESULTAT EST $somme</h1>";
+
+
+
+function ajouterWhile ($tabNombre)
+{
+    // VERSION AVEC WHILE
+    $somme = $tabNombre[0];
+    $i = 1;
+    while($i < count($tabNombre))
+    {
+        $somme = $somme + $tabNombre[$i];
+        $i++;
+    }
+
+    return $somme;
+}
+
+$somme = ajouterWhile([ 3, 6, 7, 8 ]);   // 24
+
+echo "<h1>WHILE: LE RESULTAT EST $somme</h1>";
+
+
+// CREER UNE FONCTION QUI RENVOIE LE PRODUIT DES NOMBRES DANS UN TABLEAU
+
+function multiplier ($tabNombre)
+{
+    $produit = 1;
+    for($i=0; $i < count($tabNombre); $i++)
+    {
+        $produit *= $tabNombre[$i];
+        // $produit = $produit * $tabNombre[$i];
+    }
+    return $produit;
+}
+
+$produit = multiplier([ 1, 2, 3, 4 ]);
+
+echo "<h1>LE PRODUIT EST $produit</h1>";
+
+
+
+// CREER UNE FONCTION QUI COMPTE LE NOMBRE DE VALEURS PAIRES DANS UN TABLEAU DE NOMBRE
+
+
+
