@@ -51,7 +51,7 @@ if ($identifiantFormulaire == "delete")
 <section>
     <h2>LISTE DES ARTICLES</h2>
 
-    <table>
+    <table cellspacing="0">
         <thead>
             <!-- TITRE DES COLONNES -->
             <!-- LIGNE => TABLE ROW => tr -->
