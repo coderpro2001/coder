@@ -135,7 +135,7 @@ listeBoutonDelete.forEach(function(bouton){
     // DEBUG
     // console.log(bouton);
     // SUR CHAQUE BOUTON, ON AJOUTE UN EVENT LISTENER SUR LE CLICK
-    bouton.addEventListener("click", function(){
+    bouton.addEventListener("click", function(event){
         console.log("TU AS CLIQUE");
         // JE VOUDRAIS RECOPIER L'id DE LA LIGNE DANS LE FORMULAIRE DE DELETE
         // JA VAIS RECUPERER L'ATTRIBUT data-id SUR LE BOUTON
