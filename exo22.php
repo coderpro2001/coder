@@ -379,6 +379,7 @@ function creerInsertSQL ($nomTable, $tabAssoColVal)
     {
         // echo "(DEBUG:$cle/$valeur)";
 
+        // ASTUCE: ON UTILISE $indice POUR SAVOIR SI ON EST SUR LE PREMIER ELEMENT
         if ($indice == 0)
         {
             // PREMIER ELEMENT: PAS DE VIRGULE
