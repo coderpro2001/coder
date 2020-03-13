@@ -78,6 +78,7 @@ footer {
 
 table {
     width:100%;
+    border-collapse: collapse;
 }
 table thead {
     background-color: #aaaaaa;
