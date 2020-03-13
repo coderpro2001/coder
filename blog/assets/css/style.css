@@ -75,3 +75,18 @@ footer {
     margin:0.25rem;
     padding:0.25rem;
 }
+
+table {
+    width:100%;
+}
+table thead {
+    background-color: #aaaaaa;
+}
+td {
+    border:1px solid #aaaaaa;
+    padding:0.25rem;
+}
+
+.cache {
+    display:none;
+}
