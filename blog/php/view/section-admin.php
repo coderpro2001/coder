@@ -28,6 +28,37 @@ if ($identifiantFormulaire == "create")
 </section>
 
 
+<section>
+    <h2>FORMULAIRE POUR MODIFIER UN ARTICLE (UPDATE)</h2>
+    <form id="update" class="admin" action="" method="POST">
+        <div class="infosUpdate">
+            <input type="text" name="titre" required placeholder="entrer le titre">
+            <textarea name="contenu" cols="60" rows="8" required placeholder="entrer le contenu"></textarea>
+            <!-- POUR L'IMAGE, ON DEVRAIT PROPOSER UN UPLOAD => PLUS TARD... -->
+            <input type="text" name="image" required value="assets/img/photo1.jpg">
+            <!-- https://www.php.net/manual/fr/function.date.php -->
+            <input type="text" name="datePublication" value="<?php echo date("Y-m-d H:i:s") ?>">
+            <input type="text" name="categorie" required placeholder="entrez la catégorie">
+            <!-- POUR LE UPDATE ON DOIT SAVOIR QUELLE LIGNE ON VEUT MODIFIER -->
+            <input type="text" name="id" required placeholder="entrez id ligne">
+        </div>
+
+        <!-- PARTIE TECHNIQUE POUR SAVOIR QUEL EST LE FORMULAIRE A TRAITER POUR LE SERVEUR -->
+        <input type="hidden" name="identifiantFormulaire" value="update">
+        <button type="submit">MODIFIER L'ARTICLE</button>
+        <div class="confirmation">
+        <?php 
+$identifiantFormulaire = $_REQUEST["identifiantFormulaire"] ?? "";
+if ($identifiantFormulaire == "update")
+{
+    require "php/controller/form-articles.php"; 
+}        
+            ?>
+        </div>
+
+    </form>
+</section>
+
 <section class="cache">
     <h2>FORMULAIRE DE DELETE</h2>
     <form id="delete" action="" method="POST">
@@ -111,7 +142,22 @@ foreach($tabLigne as $tabAsso)
     <td>$contenu</td>
     <td>$image</td>
     <td>$categorie</td>
-    <td><button data-id="$id" class="update">modifier</button></td>  
+    <td>
+        <button data-id="$id" class="update">modifier</button>
+        <!-- ON PEUT DONNER PLUSIEURS CLASSES A UNE BALISE -->
+        <div class="infosUpdate cache">
+            <input type="text" name="titre" required placeholder="entrer le titre" value="$titre">
+            <textarea name="contenu" cols="60" rows="8" required placeholder="entrer le contenu">$contenu</textarea>
+            <!-- POUR L'IMAGE, ON DEVRAIT PROPOSER UN UPLOAD => PLUS TARD... -->
+            <input type="text" name="image" required value="$image">
+            <!-- https://www.php.net/manual/fr/function.date.php -->
+            <input type="text" name="datePublication" value="$datePublication">
+            <input type="text" name="categorie" required placeholder="entrez la catégorie" value="$categorie">
+            <!-- POUR LE UPDATE ON DOIT SAVOIR QUELLE LIGNE ON VEUT MODIFIER -->
+            <input type="text" name="id" required placeholder="entrez id ligne" value="$id">
+        </div>
+
+    </td>  
     <td><button data-id="$id" class="delete">supprimer</button></td>  
 </tr>
 
@@ -127,6 +173,40 @@ CODEHTML;
 
 <script>
 // JE VAIS RAJOUTER DU CODE 
+
+// QUAND LE CLIENT VA CLIQUER SUR LE BOUTON update
+// ON VA COPIER LE CODE HTML DU FORMULAIRE PREREMPLI
+// A LA PLACE DU FORMULAIRE DE UPDATE (VIDE)
+var listeBoutonUpdate = document.querySelectorAll("button.update");
+// BOUCLE EN JS SUR CHAQUE BOUTON
+listeBoutonUpdate.forEach(function(bouton){
+    // ON VA ACTIVER DU CODE JS SUR LE CLICK
+    bouton.addEventListener("click", function(event){
+        // DEBUG
+        console.log("CLICK SUR UN BOUTON modifier");
+        // ON VEUT RECOPIER LE CODE HTML DU FORMULAIRE PRE-REMPLI
+        // A LA PLACE DU FORMULAIRE UPDATE VIDE
+        var baliseBouton = event.target;
+        var baliseTd = baliseBouton.parentNode;
+        var baliseUpdate = baliseTd.querySelector(".infosUpdate");
+
+        // DEBUG
+        console.log(baliseBouton);
+        console.log(baliseTd);
+        console.log(baliseUpdate);
+
+        // IL FAUT COPIER CE CODE HTML POUR REMPLACER LE FORMULAIRE VIDE
+        // baliseUpdate.innerHTML;
+        // JE VEUX AGIR SUR LE FORMULAIRE ET LA DIV class="infosUpdate"
+        var baliseUpdateForm = document.querySelector("form#update div.infosUpdate");
+        // ON COPIE LE CODE HTML D'UNE BALISE A UNE AUTRE
+        baliseUpdateForm.innerHTML = baliseUpdate.innerHTML;
+    });
+
+});
+
+
+
 // QUAND LE CLIENT VA CLIQUER SUR LE BOUTON supprimer    
 var listeBoutonDelete = document.querySelectorAll("button.delete");
 // SUR CHAQUE BOUTON, JE VAIS AJOUTER UN EVENT LISTENER SUR LE CLICK

@@ -17,6 +17,60 @@ function filtrer($name="id")
 // $identifiantFormulaire = $_REQUEST["identifiantFormulaire"] ?? "";
 $identifiantFormulaire = filtrer("identifiantFormulaire");
 
+if ($identifiantFormulaire == "update")
+{
+    // ON RECUPERE LES INFOS ENVOYEES PAR LE NAVIGATEUR
+    // ET ON VA MODIFIER LA LIGNE CORRESPONDANTE DANS LA TABLE articles
+
+    $tabAssoColonneValeur = [
+        "id"               => filtrer("id"),
+        "titre"            => filtrer("titre"),
+        "contenu"          => filtrer("contenu"),
+        "image"            => filtrer("image"),
+        "datePublication"  => filtrer("datePublication"),
+        "categorie"        => filtrer("categorie"),
+    ];
+    // ON UTILISE CE RACCOURCI POUR CREER DES VARIABLES A PARTIR DES CLES DU TABLEAU ASSOCIATIF
+    extract($tabAssoColonneValeur);
+
+    // PHP DOIT VERIFIER ET VALIDER LES INFOS RECUES
+    // => SECURITE EST BASIQUE => A AMELIORER... PLUS TARD
+    if ($id != ""                   // ATTENTION: IMPORTANT POUR LE UPDATE
+        && $titre != "" 
+        && $contenu != ""
+        && $image != ""
+        && $datePublication != ""
+        && $categorie != "")
+    {
+        // https://sql.sh/cours/update
+        $requeteSQL   =
+<<<CODESQL
+
+UPDATE articles 
+SET 
+    titre           = :titre,
+    contenu         = :contenu,
+    image           = :image,
+    datePublication = :datePublication,
+    categorie       = :categorie
+WHERE 
+    id = :id;
+
+
+CODESQL;
+
+
+        // ETAPE3: ON VA ENVOYER LA REQUETE SQL 
+        // JE CHARGE LE CODE PHP POUR ENVOYER LA REQUETE
+        require_once "php/model/envoyer-sql.php";
+
+        // MESSAGE DE CONFIRMATION
+        echo "VOTRE ARTICLE A ETE MODIFIE ($requeteSQL)";
+
+    }
+
+}
+
 if ($identifiantFormulaire == "delete")
 {
     // CODE DE TRAITEMENT DU FORMULAIRE DE DELETE
