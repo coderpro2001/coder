@@ -28,7 +28,8 @@ if ($identifiantFormulaire == "create")
 </section>
 
 
-<section>
+<section class="updateSection cache">
+    <button class="closePopup">fermer la popup</button>
     <h2>FORMULAIRE POUR MODIFIER UN ARTICLE (UPDATE)</h2>
     <form id="update" class="admin" action="" method="POST">
         <div class="infosUpdate">
@@ -174,6 +175,14 @@ CODEHTML;
 <script>
 // JE VAIS RAJOUTER DU CODE 
 
+// QUAND LE CLIENT VA CLIQUER SUR LE BOUTON "fermer la popup"
+// ON VA RAJOUTER LA CLASSE cache A LA SECTION updateSection
+var boutonClose = document.querySelector("button.closePopup");
+boutonClose.addEventListener("click", function(){
+    var baliseSectionUpdate = document.querySelector("section.updateSection");
+    baliseSectionUpdate.classList.add("cache");
+});
+
 // QUAND LE CLIENT VA CLIQUER SUR LE BOUTON update
 // ON VA COPIER LE CODE HTML DU FORMULAIRE PREREMPLI
 // A LA PLACE DU FORMULAIRE DE UPDATE (VIDE)
@@ -201,6 +210,11 @@ listeBoutonUpdate.forEach(function(bouton){
         var baliseUpdateForm = document.querySelector("form#update div.infosUpdate");
         // ON COPIE LE CODE HTML D'UNE BALISE A UNE AUTRE
         baliseUpdateForm.innerHTML = baliseUpdate.innerHTML;
+
+        // ET MAINTENANT, ON DOIT AUSSI AFFICHER LA SECTION
+        // => SUR LA BALISE section JE VAIS ENLEVER LA CLASSE cache
+        var baliseSection = document.querySelector(".updateSection");
+        baliseSection.classList.remove("cache"); // ATTENTION, PAS DE . POUR LA CLASSE
     });
 
 });

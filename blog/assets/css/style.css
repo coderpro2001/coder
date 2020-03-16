@@ -91,3 +91,28 @@ td {
 .cache {
     display:none;
 }
+
+
+section.updateSection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    color: #ffffff;
+    z-index: 999;
+    padding:2rem;
+}
+
+
+form .infosUpdate {
+    display:flex;
+    width:100%;
+    flex-direction: column;
+}
+
+.infosUpdate > * {
+    margin:0.25rem;
+    padding:0.25rem;
+}
