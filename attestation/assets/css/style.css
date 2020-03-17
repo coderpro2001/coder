@@ -7,3 +7,15 @@ header img {
     height:100px;
     object-fit: cover;
 }
+
+form {
+    display: flex;
+    width:100%;
+    flex-direction: column;
+}
+
+/* SELECTEUR POUR SELECTIONNER LES BALISES ENFANTS DIRECTS DE LA BALISE PARENTE form */
+form > * {
+    margin:0.25rem;
+    padding:0.25rem;
+}
