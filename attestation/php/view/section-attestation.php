@@ -120,6 +120,10 @@ CODESQL;
             // ETAPE2b: ON FOURNIT LES DONNEES EXTERIEURES A PART
             $pdoStatement->execute($tabAssoColonneValeur);
 
+            // POUR DEBUG SQL SI BESOIN
+            // https://www.php.net/manual/fr/pdostatement.debugdumpparams.php
+            $pdoStatement->debugDumpParams();
+
             // DEBUG
             echo "votre déclaration est bien enregistrée. NOTEZ BIEN VOTRE NUMERO D'ATTESTATION {$tabAssoColonneValeur["numero"]}";
     }
