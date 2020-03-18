@@ -67,15 +67,43 @@ CODESQL;
         // DEBUG
         $pdoStatement->debugDumpParams();
 
+        // QUAND ON VEUT FAIRE UNE LECTURE
+        // ON A ENVOYE LA REQUETE SQL
+        // ET SQL RENVOIE LES LIGNES TROUVEES DANS PHP
+
         // PERMET DE RECUPERER LES LIGNES TROUVEES
         // https://www.php.net/manual/fr/pdostatement.fetchall.php
         $tabLigneTrouvees = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        // DEBUG
+        // echo "<pre>";
+        // print_r($tabLigneTrouvees);
+        // echo "</pre>";
+/*
+Array
+(
+    [0] => Array
+        (
+            [id] => 3
+            [nom] => emmanuel
+            [prenom] => macron
+            [adresse] => champs élysées
+            [raison] => sortie sport individuel
+            [numero] => 5e70d7d6af452
+            [dateDeclaration] => 0000-00-00 00:00:00
+        )
+
+)
+*/
+
+        // DANS LE MONDE PHP, LES INFOS TROUVEES
+        // SONT SOUS LA FORME D'UN TABLEAU ORDONE DE TABLEAUX ASSOCIATIF
 
         // ON PEUT AFFICHER LE NOMBRE DE LIGNES TROUVEES
         $nbLigneTrouvees = count($tabLigneTrouvees);
         echo "<h2>IL Y A $nbLigneTrouvees RESULTAT SUR LE NUMERO $numero</h2>";
 
-        // ON FAIT UNE BOUCLE POUR PARCOURIR LE TABLEAU DES LIGNES
+        // ON FAIT UNE BOUCLE POUR PARCOURIR LE TABLEAU ORDONNE DES LIGNES SELECTIONNEES PAR NOTRE REQUETE SQL
         foreach($tabLigneTrouvees as $tabLigne)
         {
             // CHAQUE LIGNE EST UN TABLEAU ASSOCIATIF
