@@ -59,7 +59,13 @@ CODESQL;
         $pdoStatement = $pdo->prepare($requeteSQL);
 
         // ETAPE2b: ON FOURNIT LES DONNEES EXTERIEURES A PART
+        // ET SQL VA REPRENDRE LA REQUETE PREPAREE $requeteSQL 
+        // ET UTILISER LE TABLEAU ASSOCIATIF POUR CONSTRUIRE UNE REQUETE SQL COMPLETE 
+        // ET SECURISEE CONTRE LES INJECTIONS SQL
         $pdoStatement->execute($tabAssoColonneValeur);
+
+        // DEBUG
+        $pdoStatement->debugDumpParams();
 
         // PERMET DE RECUPERER LES LIGNES TROUVEES
         // https://www.php.net/manual/fr/pdostatement.fetchall.php
