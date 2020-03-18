@@ -47,18 +47,9 @@
 <?php
 // CODE POUR TRAITER LE FORMULAIRE
 
-// ON PEUT CREER DES FONCTIONS POUR NOUS FACILITER LE CODE
-// AVANTAGE1: NE PAS DUPLIQUER DES BLOCS DE CODE IDENTIQUES
-// AVANTAGE2: AJOUTER DU CODE DE SECURITE POUR FILTRER CHAQUE INFO EXTERIEURE
-function filtrer ($name)
-{
-    // SECURITE: ?? "" => SI LE NAVIGATEUR N'ENVOIE PAS L'INFO, ON PREND COMME VALEUR PAR DEFAUT ""
-    $info = $_REQUEST[$name] ?? "";
-    // ON POURRA RAJOUTER PLUS DE SECURITE
-    // ...
+// ON SEPARE LE CODE DE NOS FONCTIONS DANS UN FICHIER COMMUN
+require_once "php/mes-fonctions.php";
 
-    return $info;
-}
 
 // ATTENTION: LE CODE PHP EST ASSOCIE AU CODE HTML
 // <input type="hidden" name="identifiantFormulaire" value="declaration">
@@ -96,33 +87,10 @@ if ($identifiantFormulaire == "declaration")
             // https://www.php.net/manual/fr/function.date.php
             $tabAssoColonneValeur["dateDeclaration"] = date("Y-m-d H:i:s");
 
-            // MAINTENANT JE PEUX CONSTRUIRE LA REQUETE SQL PREPAREE
-            $requeteSQL =
-<<<CODESQL
-
-INSERT INTO declaration
-(nom, prenom, adresse, raison, numero, dateDeclaration) 
-VALUES 
-(:nom, :prenom, :adresse, :raison, :numero, :dateDeclaration) 
-
-CODESQL;
-            // ENSUITE, ON VA ENVOYER LA REQUETE SQL PREPAREE
-            // CONNECTER A SQL
-            
-            // ETAPE1: CONNECTER PHP A SQL
-            // ATTENTION: NE PAS OUBLIER DE CHANGER LA DATABASE...
-            $pdo = new PDO("mysql:host=localhost;dbname=attestation;charset=utf8;", "root", "");
-
-            // ETAPE2a: ON ENVOIE LA REQUETE PREPAREE
-            // PDOStatement EST UN CONTAINER QUI ENGLOBE LES RESULTATS DE LA REQUETE SQL
-            $pdoStatement = $pdo->prepare($requeteSQL);
-
-            // ETAPE2b: ON FOURNIT LES DONNEES EXTERIEURES A PART
-            $pdoStatement->execute($tabAssoColonneValeur);
-
-            // POUR DEBUG SQL SI BESOIN
-            // https://www.php.net/manual/fr/pdostatement.debugdumpparams.php
-            $pdoStatement->debugDumpParams();
+            // ETAPE2: ACTIVER LE CODE DE LA FONCTION
+            insererLigneSQL("declaration", $tabAssoColonneValeur);
+            // PHP FAIT $nomTable = "declaration" 
+            // PHP FAIT $param1 = $tabAssoColonneValeur
 
             // DEBUG
             echo "votre déclaration est bien enregistrée. NOTEZ BIEN VOTRE NUMERO D'ATTESTATION {$tabAssoColonneValeur["numero"]}";
