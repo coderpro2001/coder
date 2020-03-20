@@ -42,11 +42,42 @@ function createUniqueString($string, $delimiter)
 function handleRequest($request)
 {
     if (isset($request['fileUpload'])) {
+        // debug only
+        // print_r($request['fileUpload']);
+
         // on utilise extract pour se faciliter la vie et extraire les valeurs d'un tableau associatif dans des variables dont le nom correspond aux clé du tableau
         extract($request['fileUpload']);
 
         // on vérifie si pas d'erreur lors de l'upload
         if (UPLOAD_ERR_OK === $error) {
+            // on va vérifier si l'extension du fichier en upload correspond bien à un fichier image
+            $authhorizedExtensions = [
+                'jpg',
+                'jpeg',
+                'png',
+                'svg',
+            ];
+
+            // on doit récupérer l'extension de fichier dans la variable $type
+            // pour ça on va utiliser la fonction php explode()
+            // ressource : https://www.php.net/manual/fr/function.explode.php
+            // la valeur de la variable $type => image/extension
+
+            $mimeType = explode('/', $type);
+
+            // on sélectionne l'extension dans le tableau qu'a renvoyé la fonction explode()
+            $extension = $mimeType[1];
+
+            // on va vérifier que l'extension qu'on a récupéré correspond aux extensions autorisées
+            // pour faire ça on va utiliser la fonction php in_array()
+            // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
+
+            if (!in_array($extension, $authhorizedExtensions)) {
+                echo "Ce type de fichier n'est pas autorisé à l'upload";
+
+                return;
+            }
+
             $fileName = createUniqueString($name, '-');
 
             // on spécifie à quel endroit on va sauvegarder nos images sur le serveur
