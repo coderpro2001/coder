@@ -48,10 +48,18 @@ function handleRequest($request)
         // on utilise extract pour se faciliter la vie et extraire les valeurs d'un tableau associatif dans des variables dont le nom correspond aux clé du tableau
         extract($request['fileUpload']);
 
+        // si on n'utilisait pas extract() on pourrait écrire note code comme ça
+        // $name = $request['fileUpload']['name'];
+        // $type = $request['fileUpload']['type'];
+        // $tmp_name = $request['fileUpload']['tmp_name'];
+        // $error = $request['fileUpload']['error'];
+        // $size = $request['fileUpload']['size'];
+
         // on vérifie si pas d'erreur lors de l'upload
+        // ressource pour la gestion des erreurs d'upload  : https://www.php.net/manual/fr/features.file-upload.errors.php
         if (UPLOAD_ERR_OK === $error) {
             // on va vérifier si l'extension du fichier en upload correspond bien à un fichier image
-            $authhorizedExtensions = [
+            $authorizedExtensions = [
                 'jpg',
                 'jpeg',
                 'png',
@@ -66,14 +74,30 @@ function handleRequest($request)
             $mimeType = explode('/', $type);
 
             // on sélectionne l'extension dans le tableau qu'a renvoyé la fonction explode()
-            $extension = $mimeType[1];
+            // on utilise la fonction strtolower() pour passer l'extension en minuscules
+            $extension = strtolower($mimeType[1]);
 
             // on va vérifier que l'extension qu'on a récupéré correspond aux extensions autorisées
             // pour faire ça on va utiliser la fonction php in_array()
             // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
 
-            if (!in_array($extension, $authhorizedExtensions)) {
+            if (!in_array($extension, $authorizedExtensions)) {
                 echo "Ce type de fichier n'est pas autorisé à l'upload";
+
+                return;
+            }
+
+            // TODO extraire le code qui permet de vérifier si l'extension est autorisée dans une fonction utilitaire
+            // function isExtAuthorized($mime, $array) {
+            // code à exécuter
+            // si tout est ok, la fonction retourne true, sinon false
+            //     return true;
+            // }
+
+            // TODO extraire le code de vérification de la taille du fichier dans une fonction utilitaire
+            // on doit maintenant vérifier que la taille du fichier à uploader ne dépasse pas une certaine limite
+            if ($request['fileUpload']['size'] > 1000000) { //$size
+                echo 'La taille du fichier doit être inférieure à 1Mo';
 
                 return;
             }
@@ -118,6 +142,43 @@ function handleRequest($request)
 
                 return;
             }
+        } else {
+            switch ($error) {
+                case UPLOAD_ERR_INI_SIZE:
+                    $message = 'The uploaded file exceeds the upload_max_filesize directive in php.ini';
+
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                    $message = 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form';
+
+                    break;
+                case UPLOAD_ERR_PARTIAL:
+                    $message = 'The uploaded file was only partially uploaded';
+
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    $message = 'No file was uploaded';
+
+                    break;
+                case UPLOAD_ERR_NO_TMP_DIR:
+                    $message = 'Missing a temporary folder';
+
+                    break;
+                case UPLOAD_ERR_CANT_WRITE:
+                    $message = 'Failed to write file to disk';
+
+                    break;
+                case UPLOAD_ERR_EXTENSION:
+                    $message = 'File upload stopped by extension';
+
+                    break;
+                default:
+                    $message = 'Unknown upload error';
+
+                    break;
+            }
+
+            echo $message;
         }
     }
 }
