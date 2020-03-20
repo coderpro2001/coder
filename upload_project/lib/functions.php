@@ -38,7 +38,12 @@ function createUniqueString($string, $delimiter)
     return uniqid().'-'.$newString;
 }
 
-function isExtensionAuthorized($mimeType, $array)
+// Conevntions de nommage
+// camelCase
+// PascalCase
+// snake_case
+
+function isExtensionAuthorized($mimeType, $tabExtension)
 {
     // on doit récupérer l'extension de fichier dans la variable $type
     // pour ça on va utiliser la fonction php explode()
@@ -55,11 +60,23 @@ function isExtensionAuthorized($mimeType, $array)
     // pour faire ça on va utiliser la fonction php in_array()
     // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
 
-    if (in_array($extension, $array)) {
+    if (in_array($extension, $tabExtension)) {
         return true;
     }
 
     return false;
+}
+
+function isValidSize($size, $maxSize)
+{
+    // on doit maintenant vérifier que la taille du fichier à uploader ne dépasse pas une certaine limite
+
+    if ($size > $maxSize) {
+        return false;
+    }
+
+    return true;
+    // return $size < $maxSize;
 }
 
 // on crée ici une fonction qui prendra en paramètre une requête et qui traitera les données de notre formulaire
@@ -111,25 +128,12 @@ function handleRequest($request)
             //     return;
             // }
 
-            $check = isExtensionAuthorized($type, $authorizedExtensions);
+            $checkExt = isExtensionAuthorized($type, $authorizedExtensions);
 
-            if (false === $check) {
-                echo "Ce type de fichier n'est pas autorisé à l'upload";
+            $checkSize = isValidSize($size, '1000000');
 
-                return;
-            }
-
-            // TODO extraire le code qui permet de vérifier si l'extension est autorisée dans une fonction utilitaire
-            // function isExtAuthorized($mime, $array) {
-            // code à exécuter
-            // si tout est ok, la fonction retourne true, sinon false
-            //     return true;
-            // }
-
-            // TODO extraire le code de vérification de la taille du fichier dans une fonction utilitaire
-            // on doit maintenant vérifier que la taille du fichier à uploader ne dépasse pas une certaine limite
-            if ($request['fileUpload']['size'] > 1000000) { //$size
-                echo 'La taille du fichier doit être inférieure à 1Mo';
+            if (false === $checkExt || false === $checkSize) {
+                echo "Vérifiez l'extension ou la taille du fichier. Upload impossible";
 
                 return;
             }
