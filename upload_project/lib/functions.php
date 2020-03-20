@@ -38,6 +38,30 @@ function createUniqueString($string, $delimiter)
     return uniqid().'-'.$newString;
 }
 
+function isExtensionAuthorized($mimeType, $array)
+{
+    // on doit récupérer l'extension de fichier dans la variable $type
+    // pour ça on va utiliser la fonction php explode()
+    // ressource : https://www.php.net/manual/fr/function.explode.php
+    // la valeur de la variable $type => image/extension
+
+    $mimeType = explode('/', $mimeType);
+
+    // on sélectionne l'extension dans le tableau qu'a renvoyé la fonction explode()
+    // on utilise la fonction strtolower() pour passer l'extension en minuscules
+    $extension = strtolower($mimeType[1]);
+
+    // on va vérifier que l'extension qu'on a récupéré correspond aux extensions autorisées
+    // pour faire ça on va utiliser la fonction php in_array()
+    // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
+
+    if (in_array($extension, $array)) {
+        return true;
+    }
+
+    return false;
+}
+
 // on crée ici une fonction qui prendra en paramètre une requête et qui traitera les données de notre formulaire
 function handleRequest($request)
 {
@@ -66,22 +90,30 @@ function handleRequest($request)
                 'svg',
             ];
 
-            // on doit récupérer l'extension de fichier dans la variable $type
-            // pour ça on va utiliser la fonction php explode()
-            // ressource : https://www.php.net/manual/fr/function.explode.php
-            // la valeur de la variable $type => image/extension
+            // // on doit récupérer l'extension de fichier dans la variable $type
+            // // pour ça on va utiliser la fonction php explode()
+            // // ressource : https://www.php.net/manual/fr/function.explode.php
+            // // la valeur de la variable $type => image/extension
 
-            $mimeType = explode('/', $type);
+            // $mimeType = explode('/', $type);
 
-            // on sélectionne l'extension dans le tableau qu'a renvoyé la fonction explode()
-            // on utilise la fonction strtolower() pour passer l'extension en minuscules
-            $extension = strtolower($mimeType[1]);
+            // // on sélectionne l'extension dans le tableau qu'a renvoyé la fonction explode()
+            // // on utilise la fonction strtolower() pour passer l'extension en minuscules
+            // $extension = strtolower($mimeType[1]);
 
-            // on va vérifier que l'extension qu'on a récupéré correspond aux extensions autorisées
-            // pour faire ça on va utiliser la fonction php in_array()
-            // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
+            // // on va vérifier que l'extension qu'on a récupéré correspond aux extensions autorisées
+            // // pour faire ça on va utiliser la fonction php in_array()
+            // // si l'extension n'est pas dans le tableau des extensions autorisées, on affiche un message à l'utilisateur et on stoppe le script
 
-            if (!in_array($extension, $authorizedExtensions)) {
+            // if (!in_array($extension, $authorizedExtensions)) {
+            //     echo "Ce type de fichier n'est pas autorisé à l'upload";
+
+            //     return;
+            // }
+
+            $check = isExtensionAuthorized($type, $authorizedExtensions);
+
+            if (false === $check) {
                 echo "Ce type de fichier n'est pas autorisé à l'upload";
 
                 return;
