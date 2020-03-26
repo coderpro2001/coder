@@ -6,6 +6,8 @@
     <title>Document</title>
   </head>
   <body>
+    <h1>Nome de la ville :</h1>
+    <p>Température du jour :</p>
     <script>
       // step 1 : obtenir son adresse ip
       fetch("https://api.ipify.org?format=json")
@@ -52,7 +54,16 @@
                   return response.json();
                 })
                 .then(function(data) {
-                  console.log(data);
+                  //console.log(data);
+
+                  // ici je récupère les éléments du DOM dans lesquels je veux afficher la valeur des infos météo que je récupère
+                  const city = document.querySelector("h1");
+                  const temp = document.querySelector("p");
+
+                  // ensuite j'injecte ces valeurs dans le DOM
+                  // par ex : je vais chercher la valeur de la propriété temp de la propriété main de l'objet data
+                  city.innerText += data.name;
+                  temp.innerText += data.main.temp;
                 });
             });
         });
