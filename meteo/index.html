@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css"
+    />
   </head>
   <body>
-    <h1>Nome de la ville :</h1>
-    <p>Température du jour :</p>
+    <h1>Nom de la ville :&nbsp;</h1>
+    <p>Température du jour : &nbsp;</p>
+    <i class="wi"></i>
     <script>
       // step 1 : obtenir son adresse ip
       // pour ça on va utiliser l'API ipify (gratuite) qui va récupérer notre adresse ip
@@ -76,16 +81,25 @@
                 })
                 .then(function(data) {
                   // on récupère un objet js, on peut maintenant accéder à ses propriétés
+                  // debug
                   //console.log(data);
 
                   // ici je récupère les éléments du DOM dans lesquels je veux afficher la valeur des infos météo que je récupère
                   const city = document.querySelector("h1");
                   const temp = document.querySelector("p");
+                  const conditions = document.querySelector("i");
 
                   // ensuite j'injecte ces valeurs dans le DOM
                   // par ex : je vais chercher la valeur de la propriété temp de la propriété main de l'objet data
-                  city.innerText += data.name;
-                  temp.innerText += data.main.temp;
+
+                  const name = data.name;
+                  const temperature = data.main.temp;
+                  const icon = data.weather[0].id;
+
+                  // on peut maintenant afficher les informations dans les éléments du DOM qui nous intéressent
+                  city.innerText += name;
+                  temp.innerText += temperature;
+                  conditions.classList.add(`wi-owm-${icon}`);
                 });
             });
         });
