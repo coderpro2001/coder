@@ -12,7 +12,9 @@
   <body>
     <h1>Nom de la ville :&nbsp;</h1>
     <p>Température du jour : &nbsp;</p>
+    <!-- lien vers les entités HTML : https://www.freeformatter.com/html-entities.html -->
     <i class="wi"></i>
+
     <script>
       // step 1 : obtenir son adresse ip
       // pour ça on va utiliser l'API ipify (gratuite) qui va récupérer notre adresse ip
@@ -82,7 +84,7 @@
                 .then(function(data) {
                   // on récupère un objet js, on peut maintenant accéder à ses propriétés
                   // debug
-                  //console.log(data);
+                  console.log(data);
 
                   // ici je récupère les éléments du DOM dans lesquels je veux afficher la valeur des infos météo que je récupère
                   const city = document.querySelector("h1");
@@ -92,14 +94,25 @@
                   // ensuite j'injecte ces valeurs dans le DOM
                   // par ex : je vais chercher la valeur de la propriété temp de la propriété main de l'objet data
 
-                  const name = data.name;
-                  const temperature = data.main.temp;
+                  const ville = data.name;
+                  const temperature = Math.round(data.main.temp);
                   const icon = data.weather[0].id;
 
+                  // console.log("La ville est ", ville);
+                  // console.log("La température est ", temperature);
+                  // propriétés possibles affichage icone : description, id, icon, main
+                  // console.log(icon);
+
                   // on peut maintenant afficher les informations dans les éléments du DOM qui nous intéressent
-                  city.innerText += name;
+                  //city.innerText = city.innerText + ville;
+                  // on peut aussi l'écrire de manière raccourcie
+                  city.innerText += ville;
                   temp.innerText += temperature;
-                  conditions.classList.add(`wi-owm-${icon}`);
+                  // console.log(conditions.classList);
+                  const conditionsClass = "wi-owm-" + icon; // va afficher wi-owm-500
+                  // méthode ES6 d'interpolation des variables dans une chaîne de caractères
+                  //  const conditionsClass = `wi-owm-${icon}`
+                  conditions.classList.add(conditionsClass);
                 });
             });
         });
