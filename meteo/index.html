@@ -52,7 +52,7 @@
           fetch(
             "http://api.ipstack.com/" +
               ip +
-              "?access_key=30c029b1d2a8dcdcdf26ac5a0e07b914"
+              "?access_key=30c029b1d2a8dcddf26ac5a0e07b914"
           )
             .then(function(response) {
               // on récupère la réponse et on la formatte en objet javascript
@@ -109,6 +109,7 @@
                   city.innerText += ville;
                   temp.innerText += temperature;
                   // console.log(conditions.classList);
+                  // format des classes css de la librairie weather icons pour openweathermap : wi-owm-id
                   const conditionsClass = "wi-owm-" + icon; // va afficher wi-owm-500
                   // méthode ES6 d'interpolation des variables dans une chaîne de caractères
                   //  const conditionsClass = `wi-owm-${icon}`
