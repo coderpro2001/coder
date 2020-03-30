@@ -8,3 +8,19 @@ img {
     object-fit:cover;
     max-height:100vh;
 }
+
+/* ON VA FAIRE UNE LIGNE POUR LES ARTICLES AVEC FLEX */
+.listeArticle {
+    display:flex;
+    width:100%;
+    flex-wrap: wrap;
+}
+
+.listeArticle article {
+    width: calc(100% / 3); /* POUR AVOIR 3 COLONNES */
+}
+
+.listeArticle article img {
+    max-height: 160px;
+    object-fit: cover;
+}
