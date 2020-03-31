@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+html, body {
+    width:100%;
+    height:100%;
+    font-size:16px;
+    padding:0;
+    margin:0;
+}        
+* {
+    box-sizing: border-box;
+}
+
+.listeArticle{
+    display: flex;
+    width:100%;
+    flex-wrap: wrap;
+}        
+.listeArticle article {
+    width: calc(100% / 3);
+    border: 1px solid orange;
+    padding:1rem;
+}
+    </style>
+</head>
+<body>
+    <section>
+        <h2>FORMULAIRE DE RECHERCHE</h2>
+        <form class="search" action="">
+            <input type="text" name="recherche" required placeholder="entrez un mot">
+            <button type="submit">lancer la recherche</button>
+        </form>
+    </section>
+    <section>
+        <h2>JSON</h2>
+        <div class="listeArticle listeJSON">
+            <!-- ON VA UTILISER JS POUR OBTENIR LA MEME CHOSE-->
+        </div>
+    </section>
+    <script>
+// FORMULAIRE DE RECHERCHE
+// BLOQUER LE FORMULAIRE CLASSIQUE
+var baliseForm  = document.querySelector(".search");
+var baliseInput = document.querySelector("input[name=recherche]");
+var listeJSON   = document.querySelector(".listeJSON");
+var tableauJSON = [];   // AU DEPART LE TABLEAU EST VIDE
+
+baliseForm.addEventListener("submit", function(event){
+    // POUR BLOQUER L'ENVOI DU FORMULAIRE
+    event.preventDefault();
+
+    // ON DOIT RECUPERER LE TEXTE SAISI
+    var texteSaisi = baliseInput.value;
+
+    // DEBUG
+    console.log(texteSaisi);
+
+    // ET ON DOIT ENVOYER UNE REQUETE AJAX VERS recherche-api.php
+    // ET ENSUITE ON RECUPERE LES INFOS JSON
+    // ET ON CONSTRUIT LE HTML POUR AFFICHER LES ARTICLES
+
+    // formData PERMET DE RAJOUTER DES INFORMATIONS SUPPLEMENTAIRES A ENVOYER VERS PHP
+    formData = new FormData();
+    // ON VA AJOUTER LE TEXTE SAISI
+    formData.append("recherche", texteSaisi);
+
+    fetch('recherche-api.php',
+    {
+        method: 'POST',
+        body:   formData
+    })
+    .then(function(reponseServeur) {
+        return reponseServeur.json();
+    })
+    .then(function(objetJSON) {
+        tableauJSON = objetJSON;
+
+        // ON VA REINITIALISER LA LISTE
+        listeJSON.innerHTML = "";
+        
+        for(var a=0; a < tableauJSON.length; a++)
+        {
+            listeJSON.innerHTML += 
+            `
+                <article>
+                    <h3>${tableauJSON[a].titre}</h3>
+                    <h4>catégorie: ${tableauJSON[a].categorie}</h4>  
+                    <p>${tableauJSON[a].contenu}</p>
+                </article>
+            `
+        }
+
+    });
+
+});
+
+
+
+    </script>
+
+</body>
+</html>
