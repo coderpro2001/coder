@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h3>EXEMPLE 1</h3>
+        <button id="bouton1" data-reference="coucou">CLIQUEZ ICI</button>
+        <button id="bouton2">2E BOUTON</button>
+        <ul id="liste1">
+            <li>ELEMENT1</li>
+            <li>ELEMENT2</li>
+        </ul>
+        <script>
+// DEBUT DU JS
+
+// POUR FAIRE SIMPLE, JE VAIS METTRE MON CODE JS DANS UNE BALISE script DIRECTEMENT
+// ASTUCE (ANCIENNE MAIS QUI MARCHE ENCORE...)
+// LE NAVIGATEUR CREE UNE VARIABLE A PARTIR DE id EN HTML id="bouton1"
+// console.log() PERMET DE COMPRENDRE QUELLE VALEUR EST MEMORISE DANS UNE VARIABLE
+console.log(bouton1);
+console.log(bouton2);
+
+// console.log(bouton); // Uncaught ReferenceError: bouton is not defined
+
+// MANIPULATION DU DOM
+// EN PHP $objet -> methode()
+// EN JS  objet  .  methode()
+//        objet  .  propriete
+
+// SI JE VEUX CHANGER LE TEXTE DU BOUTON1
+// ECRITURE
+bouton1.innerHTML = "LE NOUVEAU TEXTE";
+
+// SI JE VEUX LIRE LE CONTENU D'UNE BALISE
+console.log(bouton2.innerHTML);
+
+// LECTURE
+// SI JE VEUX LIRE LA VALEUR D'UN ATTRIBUT D'UNE BALISE
+var reference = bouton1.getAttribute("data-reference");
+console.log(reference);
+
+// SUR LE PRINCIPE CA POURRAIT MARCHER, MAIS EN PRATIQUE MALHEUREUSEMENT NON
+// console.log(bouton1.data-reference);
+
+// ECRITURE
+// SI JE VEUX CHANGER LA VALEUR D'UN ATTRIBUT D'UNE BALISE
+bouton1.setAttribute("data-reference", "nouvelle valeur");
+
+// SI JE VEUX AFFICHER LE CODE HTML A L'INTERIEUR DE LA BALISE ul
+var interieur = liste1.innerHTML;
+console.log(interieur);
+
+// SI JE VEUX REMPLACER LA BALISE <li>ELEMENT1</li> PAR <li>ELEMENT NOUVEAU</li>
+liste1.innerHTML = '<li><h5>ELEMENT NOUVEAU</h5></li>';
+
+// SI JE VEUX AJOUTER A LA LISTE ACTUELLE 
+// UNE BALISE SUPPLEMENTAIRE A LA FIN <li>ELEMENT SUPPLEMENTAIRE</li>
+// liste1.innerHTML = liste1.innerHTML + '<li>ELEMENT SUPPLEMENTAIRE</li>';
+liste1.innerHTML += '<li>ELEMENT SUPPLEMENTAIRE</li>';
+
+// SI JE VEUX AJOUTER A LA LISTE ACTUELLE 
+// UNE BALISE SUPPLEMENTAIRE AE DEBUT <li>ELEMENT AU DEBUT</li>
+liste1.innerHTML = '<li>ELEMENT AU DEBUT</li>' + liste1.innerHTML;
+
+
+// CA SERT PAS A GRAND CHOSE DE CODER DU JS AU LIEU DE CODER DU HTML DIRECTEMENT ?!
+// => LA PROGRAMMATION FONCTIONNELLE
+// ETAPE1: DECLARATION => LE CODE EST EN ATTENTE
+function changerBouton2 ()
+{
+    bouton2.innerHTML = "TU AS CHANGE LE TEXTE DU BOUTON";
+}
+
+// ETAPE2: C'EST MOI QUI ACTIVE LE CODE EN APPELANT LA FONCTION
+// changerBouton2();
+// PAS TRES UTILE D'ACTIVER LA FONCTION DIRECTEMNT...
+
+// INTERACTION
+// SI LE VISITEUR CLIQUE SUR LE BOUTON1
+// ALORS CA VA DECLENCHER L'APPEL A MA FONCTION changerBouton2
+bouton1.addEventListener('click', changerBouton2);
+
+
+
+// FIN DU JS
+        </script>
+    </section>
+</body>
+</html>
