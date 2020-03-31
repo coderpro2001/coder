@@ -4,10 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+html, body {
+    width:100%;
+    height:100%;
+    font-size:16px;
+    padding:0;
+    margin:0;
+}        
+* {
+    box-sizing: border-box;
+}
+
+.listeArticle{
+    display: flex;
+    width:100%;
+    flex-wrap: wrap;
+}        
+.listeArticle article {
+    width: calc(100% / 3);
+    border: 1px solid orange;
+    padding:1rem;
+}
+    </style>
 </head>
 <body>
     <section>
+        <h2>CODE EN HTML</h2>
+        <div class="listeArticle">
+            <article>
+                <h3>titre article1</h3>
+            </article>
+            <article>
+                <h3>titre article2</h3>
+            </article>
+            <article>
+                <h3>titre article3</h3>
+            </article>
+        </div>
         <h2>JSON</h2>
+        <div class="listeArticle listeJSON">
+            <!-- ON VA UTILISER JS POUR OBTENIR LA MEME CHOSE-->
+        </div>
     </section>
     <script>
 // EN JS, POUR FAIRE DE LA POO C'EST FACILE
@@ -27,6 +65,110 @@ var objetProprieteValeur =
 
 // EN JS, ON N'A PAS DE TABLEAU ASSOCIATIF (COMME EN PHP)
 // CAR LES OBJETS EN JS SERVENT A LA MEME CHOSE
+
+// EXERCICE
+// CODER EN JS POUR CONSTRUIRE LES BALISES HTML DES ARTICLES
+var listeJSON = document.querySelector(".listeJSON");
+
+/*
+// VERSION 1: JE RAJOUTE CHAQUE ARTICLE UN PAR UN
+listeJSON.innerHTML = listeJSON.innerHTML + '<article><h3>titre article1</h3></article>';
+listeJSON.innerHTML = listeJSON.innerHTML + '<article><h3>titre article2</h3></article>';
+listeJSON.innerHTML = listeJSON.innerHTML + '<article><h3>titre article3</h3></article>';
+*/
+
+/*
+// VERSION2: TABLEAU ET UNE BOUCLE
+var tableau = [
+    'titre article1',
+    'titre article2',
+    'titre article3',
+];
+// BOUCLE FOR EN JS
+for(var a=0; a < tableau.length; a++)
+{
+    // CODE MANQUANT
+    listeJSON.innerHTML += '<article><h3>' + tableau[a] + '</h3></article>';
+}
+*/
+
+// VERSION 3: tableau avec des objets JSON ET UNE BOUCLE
+// note: pour les propriétés on devrait utiliser les "" tout le temps pour écrire en JSON standard
+/*
+var tableauJSON = 
+[
+    { "titre": 'titre article1', contenu : 'contenu1' },
+    { "titre": 'titre article2', contenu : 'contenu2' },
+    { "titre": 'titre article3', contenu : 'contenu3' },
+    { "titre": 'titre article4', contenu : 'contenu4' },
+    { "titre": 'titre article5', contenu : 'contenu5' },
+    { "titre": 'titre article6', contenu : 'contenu6' }
+];
+
+
+// BOUCLE FOR EN JS POUR OBTENIR LE MEME RESULTAT
+for(var a=0; a < tableauJSON.length; a++)
+{
+    // listeJSON.innerHTML += '<article><h3>' + tableauJSON[a].titre + '</h3></article>'; 
+    listeJSON.innerHTML += 
+    `
+        <article>
+            <h3>${tableauJSON[a].titre}</h3>
+            <p>${tableauJSON[a].contenu}</p>
+        </article>
+    `
+}
+*/
+
+
+// VERSION4: AVEC CHARGEMENT DU TABLEAU PAR AJAX
+var tableauJSON = [];   // AU DEPART LE TABLEAU EST VIDE
+
+// ON VA FAIRE UNE REQUETE AJAX POUR FOURNIR LES OBJETS DANS LE TABLEAU
+// ON VA DEMANDER A api.php DE NOUS DONNER LE TABLEAU JSON
+// fetch('http://localhost:81/simplon/coder/revision-js/api.php');
+// note: j'utilise une URL simple car l'API est sur le même site
+// code basique... il faudrait passer par une bibliothèque pour avoir un code plus robuste
+
+// fetch: JS VA CHERCHER LES INFOS DE PHP
+// (fetch => LITTERALEMENT INVOCATION DE DEMON ;-p)
+
+// POUR ENVOYER DES PARAMETRES DE JS VERS PHP
+formData = new FormData();
+
+fetch('api.php',
+{
+    method: 'POST',
+    body:   formData
+})
+.then(function(reponseServeur) {
+    // LE NAVIGATEUR RECOIT UN TEXTE CODE/FORMATTE EN JS
+    // MAIS CE N'EST ENCORE UN OBJET JS
+    // .json() SERT A TRANSFORMER CE TEXTE EN OBJET JS
+    return reponseServeur.json();
+})
+.then(function(objetJSON) {
+    // C'EST COOL
+    tableauJSON = objetJSON;
+    console.log(tableauJSON);
+
+    // ON PEUT UTILISER LE TABLEAU POUR CONSTRUIRE LE HTML
+    // BOUCLE FOR EN JS POUR OBTENIR LE MEME RESULTAT
+    for(var a=0; a < tableauJSON.length; a++)
+    {
+        // listeJSON.innerHTML += '<article><h3>' + tableauJSON[a].titre + '</h3></article>'; 
+        listeJSON.innerHTML += 
+        `
+            <article>
+                <h3>${tableauJSON[a].titre}</h3>
+                <h4>catégorie: ${tableauJSON[a].categorie}</h4>  
+                <p>${tableauJSON[a].contenu}</p>
+            </article>
+        `
+    }
+
+});
+
 
     </script>
 
