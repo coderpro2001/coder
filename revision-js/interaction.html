@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.article1 {
+    border:1px solid green;
+    padding:1rem;
+} 
+
+.cacher {
+    display: none;
+}
+    </style>
+
+</head>
+<body>
+    <section>
+        <h2>INTERACTION</h2>
+        <button class="bouton1">CLIQUER ICI POUR CACHER L'ARTICLE...</button>
+        <article class="article1">
+            <h3>TITRE ARTICLE</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia cum cupiditate illo eveniet optio nisi dignissimos nemo quasi temporibus? Beatae quibusdam laudantium accusantium in magni nesciunt ratione omnis at recusandae.</p>
+        </article>
+    </section>
+    <script>
+// SI LE VISITEUR CLIQUE SUR LE BOUTON
+// ALORS ON VA AJOUTER LA CLASSE cacher A LA BALISE article
+var bouton1  = document.querySelector(".bouton1");
+var article1 = document.querySelector(".article1");
+
+// ECRITURE COMPACTE MAIS POPULAIRE CAR LES DEVS SONT DES FLEMMARDS...
+bouton1.addEventListener("click", function ()
+{
+    article1.classList.toggle("cacher");
+});
+
+
+/*
+function cacherArticle ()
+{
+    // DEBUG
+    console.log("FONCTION ACTIVEE..");
+
+    // https://developer.mozilla.org/fr/docs/Web/API/Element/classList
+
+    // ICI ON DOIT RAJOUTER LE CODE POUR CACHER L'ARTICLE
+    // ON VA AJOUTER LA CLASSE cacher A LA BALISE article1
+    // article1.classList.add("cacher"); // ATTENTION PAS .cacher MAIS JUSTE cacher
+
+    // PRATIQUE POUR BASCULER: 
+    // SOIT ON AJOUTE LA CLASSE SI ELLE N'EST PAS PRESENTE
+    // SOIT ON ENLEVE LA CLASSE SI ELLE EST PRESENTE
+    article1.classList.toggle("cacher");
+
+    // POSSIBLE MAIS PAS RECOMMENDE...
+    // article1.setAttribute("class", "cacher");
+}
+
+// C'EST LE VISITEUR QUI VA DECLENCHER L'APPEL A LA FONCTION cacherArticle
+bouton1.addEventListener("click", cacherArticle);
+*/
+
+
+
+    </script>
+</body>
+</html>

@@ -7,15 +7,22 @@
 </head>
 <body>
     <section>
-        <h3>EXEMPLE 1</h3>
+        <h3 class="titre3">EXEMPLE 1</h3>
         <button id="bouton1" data-reference="coucou">CLIQUEZ ICI</button>
         <button id="bouton2">2E BOUTON</button>
         <ul id="liste1">
             <li>ELEMENT1</li>
             <li>ELEMENT2</li>
         </ul>
+
         <script>
 // DEBUT DU JS
+
+// ASTUCE DES VARIABLES JS NE MARCHE QUE AVEC LES id EN HTML...
+// Uncaught ReferenceError: titre3 is not defined
+// console.log(titre3);
+var titre3 = document.querySelector(".titre3");
+console.log(titre3);
 
 // POUR FAIRE SIMPLE, JE VAIS METTRE MON CODE JS DANS UNE BALISE script DIRECTEMENT
 // ASTUCE (ANCIENNE MAIS QUI MARCHE ENCORE...)
@@ -77,9 +84,9 @@ function changerBouton2 ()
 
 // ETAPE2: C'EST MOI QUI ACTIVE LE CODE EN APPELANT LA FONCTION
 // changerBouton2();
-// PAS TRES UTILE D'ACTIVER LA FONCTION DIRECTEMNT...
+// PAS TRES UTILE D'ACTIVER LA FONCTION DIRECTEMENT...
 
-// INTERACTION
+// INTERACTION (PROGRAMMATION EVENEMENTIELLE...)
 // SI LE VISITEUR CLIQUE SUR LE BOUTON1
 // ALORS CA VA DECLENCHER L'APPEL A MA FONCTION changerBouton2
 bouton1.addEventListener('click', changerBouton2);
