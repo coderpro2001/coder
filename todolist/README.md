@@ -52,6 +52,9 @@ Le rôle de la classe `Database` est d'établir une connexion à la BDD et de re
 
     1.  BDD : `todolist`
     2.  Table : `todos`
+        1.  `id int auto_increment not null primary key`
+        2.  `title varchar(100)`
+        3.  `description varchar(255)`
 
 2.  index.php
 
