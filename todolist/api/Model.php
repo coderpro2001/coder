@@ -46,6 +46,26 @@ class Model
         return $PdoStatement->execute($todo);
     }
 
+    public function deleteTodo($todo)
+    {
+        // TODO établir une connexion à la db
+        $pdo = $this->getConnection();
+
+        // TODO écrire la requête en delete
+        $query = 'DELETE FROM todo WHERE id = :id';
+
+        // TODO préparer la requête
+        $PdoStatement = $pdo->prepare($query);
+
+        // TODO exécuter la requête en passant la bonne valeur
+        // TODO retourner le résultat de la requête (dans notre cas true ou false)
+        $values = [
+            'id' => $todo['id'],
+        ];
+
+        return $PdoStatement->execute($values);
+    }
+
     // on crée une méthode qui va nous permettre de créer une nouvelle instance de la classe Database et qui va retourner un objet PDO
     // cette méthode sera privée, elle ne sera accesiible que depuis cette classe
     private function getConnection()
@@ -59,9 +79,8 @@ class Model
 
 $model = new Model();
 
-$response = $model->createTodo([
-    'title' => 'Test de la méthode create',
-    'description' => 'description méthode create',
+$response = $model->deleteTodo([
+    'id' => '91',
 ]);
 
 var_dump($response);
