@@ -40,6 +40,10 @@ class Database
     }
 }
 
+// $db = new Database();
+
+// $pdo = $db->connect();
+
 // pour exemple seulement :
 
 // class User

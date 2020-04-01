@@ -14,12 +14,36 @@ class Model
 
         $query = 'SELECT * FROM todo'; // ceci est juste une chaîne de caractères
 
-        $PdoStatement = $pdo->prepare($query);
+        // on pourrait très bien passer la requête directement en paramètre à prepare()
+        // $PdoStatement = $pdo->prepare('SELECT * FROM todo');
 
+        $PdoStatement = $pdo->prepare($query);
         $PdoStatement->execute();
 
         // debug : affichage du résultat
         print_r($PdoStatement->fetchAll());
+    }
+
+    // ici $todo sera un tableau associatif avec comme clés title, description
+    /* $todo = [
+        "title" => "titre de la tâche",
+        "description" => "description"
+    ];
+    */
+    public function createTodo($todo)
+    {
+        // TODO établir une connexion à la db
+        $pdo = $this->getConnection();
+
+        // TODO écrire la requête en insertion
+        $query = 'INSERT INTO todo (title, description) VALUES (:title, :description)';
+
+        // TODO préparer la requête
+        $PdoStatement = $pdo->prepare($query);
+
+        // TODO exécuter le requête en passant les bonnes valeurs
+        // TODO retourner le résultat de la requête (dans notre cas true ou false)
+        return $PdoStatement->execute($todo);
     }
 
     // on crée une méthode qui va nous permettre de créer une nouvelle instance de la classe Database et qui va retourner un objet PDO
@@ -32,3 +56,14 @@ class Model
         return $db->connect();
     }
 }
+
+$model = new Model();
+
+$response = $model->createTodo([
+    'title' => 'Test de la méthode create',
+    'description' => 'description méthode create',
+]);
+
+var_dump($response);
+
+//$model->getTodos();
