@@ -37,7 +37,36 @@ class TodoController
         echo json_encode($response);
     }
 
-    // create
+    // create : prend en paramètre une request de type POST
+    public function create($request)
+    {
+        // la request va contenir les infos du formulaire
+        // je vérifie si j'ai bien title et description dans ma requête
+        if (isset($request['title'], $request['description'])) {
+            $todo = [
+                'title' => $request['title'],
+                'description' => $request['description'],
+            ];
+
+            if ($this->model->createTodo($todo)) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'La nouvelle tâche a bien été enrgistrée',
+                ];
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Echec de création de la nouvelle tâche',
+                ];
+            }
+
+            echo json_encode(($response));
+        }
+
+        // si la méthode createTodo de la classe Model renvoie true
+        // reponse de type success
+        // sinon réponse de type erreur
+    }
 
     // update
 
@@ -45,13 +74,18 @@ class TodoController
 }
 
 // debug only
-require_once '../Model.php';
+// require_once '../Model.php';
 
-// on crée une nouvelle instance de la classe Model
-$model = new Model();
+// // on crée une nouvelle instance de la classe Model
+// $model = new Model();
 
-// on crée une nouvelle instance de la classe TodoController et on lui passe l'instance de la classe Model su'on vient de créer
-$controller = new TodoController($model);
+// // on crée une nouvelle instance de la classe TodoController et on lui passe l'instance de la classe Model su'on vient de créer
+// $controller = new TodoController($model);
 
-// on appelle la méthode getAll de la classe TodoController
-$controller->getAll();
+// $todo = [
+//     'title' => 'titre test méthode create',
+//     'description' => 'description test',
+// ];
+
+// // on appelle la méthode getAll de la classe TodoController
+// $controller->create($todo);
