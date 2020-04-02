@@ -15,9 +15,26 @@ class TodoController
     public function getAll()
     {
         $data = $this->model->getTodos();
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
+
+        // je veux vérifier s'il y a au moins 1 élément dans mon tableau
+        if (count($data) > 0) {
+            // code à exécuter si la condition est vraie
+            // je construis ma réponse sous la forme d'un tableau associatif
+            $response = [
+                'status' => 'success',
+                'message' => 'Les données ont bien été récupérées',
+                'payload' => $data,
+            ];
+        } else {
+            // code à excécuter si la conditionest fausse
+            $response = [
+                'status' => 'error',
+                'message' => 'Aucune données dans la table',
+            ];
+        }
+
+        // je dois transformer le tableau associatif de la réponse en JSON qui va pouvoir être compris et exploité par JS
+        echo json_encode($response);
     }
 
     // create
