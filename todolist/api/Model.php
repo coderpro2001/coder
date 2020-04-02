@@ -21,7 +21,11 @@ class Model
         $PdoStatement->execute();
 
         // debug : affichage du résultat
-        print_r($PdoStatement->fetchAll());
+        // print_r($PdoStatement->fetchAll());
+
+        // je return le résultat de ma requête
+
+        return $PdoStatement->fetchAll();
     }
 
     // ici $todo sera un tableau associatif avec comme clés title, description
@@ -77,12 +81,12 @@ class Model
     }
 }
 
-$model = new Model();
+// $model = new Model();
 
-$response = $model->deleteTodo([
-    'id' => '91',
-]);
+// $response = $model->deleteTodo([
+//     'id' => '91',
+// ]);
 
-var_dump($response);
+// var_dump($response);
 
 //$model->getTodos();
