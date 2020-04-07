@@ -55,6 +55,7 @@ if ( $the_query->have_posts() ) :
       <article>
          <?php the_post_thumbnail() ?>
         <h3><?php the_title() ?></h3>
+        <h4>DATE DU MATCH: <?php echo post_custom("date-match") ?></h4>
         <div><?php the_content() ?></div>
 </article>
 <?php        
@@ -95,6 +96,8 @@ if ( $the_query->have_posts() ) :
 ?>    
       <article>
          <?php the_post_thumbnail() ?>
+         <h4>AVEC WP ET CUSTOM FIELDS: <?php echo post_custom("prix") ?> euros</h4>
+         <h4>AVEC ACF: <?php the_field("prix") ?> euros</h4>
 </article>
 <?php        
     // End the Loop 
