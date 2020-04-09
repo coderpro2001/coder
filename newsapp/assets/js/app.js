@@ -59,19 +59,32 @@ function fetchData(inputValue) {
         // méthode for()
         for (let i = 0; i < articles.length; i++) {
           console.log(articles[i]);
-          // afficher les articles dans le HMTL
 
-          // ici on pourrait utiliser le principe de destructuring pour améliorer la lisibilité du code
+          /* ici on pourrait utiliser le principe de destructuring pour améliorer la lisibilité du code
+          const { title, description, author, url, urlToImage } = articles[i];
+
 
           const output = `
           <article>
-            <h3>${articles[i].title}</h3>
-            <p>${articles[i].description}</p>
-            <small>${articles[i].author}</small>
-            <a href=${articles[i].url}>Lien vers l'article</a>
-            <img src=${articles[i].urlToImage} alt=${articles[i].title}/>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <small>${author}</small>
+            <a href=${url}>Lien vers l'article</a>
+            <img src=${urlToImage} alt=${title}/>
           </article>
         `;
+        */
+
+          //afficher les articles dans le HMTL
+          const output = `
+            <article>
+              <h3>${articles[i].title}</h3>
+              <p>${articles[i].description}</p>
+              <small>${articles[i].author}</small>
+              <a href=${articles[i].url}>Lien vers l'article</a>
+              <img src=${articles[i].urlToImage} alt=${articles[i].title}/>
+            </article>
+          `;
 
           articlesContainer.innerHTML += output;
         }
