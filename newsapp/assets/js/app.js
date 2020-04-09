@@ -108,7 +108,7 @@ function fetchData(inputValue) {
       console.log(newArticles);
       */
       } else {
-        articlesContainer.innerHTML += `Aucun article trouvé pour la recherche`;
+        articlesContainer.innerHTML += `Aucun article trouvé pour la recherche : ${inputValue}`;
       }
     });
 }
