@@ -85,6 +85,8 @@ baliseForm.addEventListener("submit", function(event){
         
         for(var a=0; a < tableauJSON.length; a++)
         {
+            // ICI ON DOIT UTILISER innerHTML 
+            // POUR QUE LE NAVIGATEUR PRENNE EN COMPTE LES BALISES HTML
             listeJSON.innerHTML += 
             `
                 <article>
@@ -94,7 +96,12 @@ baliseForm.addEventListener("submit", function(event){
                 </article>
             `
         }
-
+        // MESSAGE DANS LE CAS OU ON A AUCUN RESULTAT
+        if (tableauJSON.length == 0)
+        {
+            // SI LA VALEUR EST DU TEXTE SIMPLE, ON PEUT UTILISER innerText
+            listeJSON.innerText = "DESOLE ON A AUCUN RESULTAT";
+        }
     });
 
 });

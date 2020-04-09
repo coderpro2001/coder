@@ -11,6 +11,7 @@
 // ON VA POUVOIR METTRE EN PLACE UN CHARGEMENT AUTOMATIQUE DE CLASSE
 // https://www.php.net/manual/fr/function.spl-autoload-register.php
 // UN PEU COMME LES addEventListener EN JS...
+// rappel: EN PHP TOUTES LES VARIABLES/PARAMETRES COMMENCENT PAR $
 function chargerCodeClasse ($parametre)
 {
     // DEBUG 
