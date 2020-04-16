@@ -7,7 +7,7 @@
 // print_r($_GET);
 $name = $_GET['query'];
 
-// je construit le nom du fichier dont je vais avoir besoin pour le traitement
+// je construis le nom du fichier dont je vais avoir besoin pour le traitement
 $dataSource = "{$name}.php";
 
 // je récupère le fichier correspondant
