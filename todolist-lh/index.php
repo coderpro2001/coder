@@ -73,9 +73,31 @@ var formulaire = document.querySelector("form.ajax");
 // VERSION1: CLASSIQUE
 function envoyerFormulaireAjax (event) 
 {
-    // LE PARAMETRE SERT A BLOQUER LE FORMULAIRE CLASSIQUE...
+    // LE PARAMETRE event NOUS SERT A BLOQUER LE FORMULAIRE CLASSIQUE...
     event.preventDefault();
     console.log("FORMULAIRE AJAX EN COURS...");
+
+    // https://developer.mozilla.org/fr/docs/Web/Guide/Using_FormData_Objects
+    // ON VA RECUPERER LES INFOS DU FORMULAIRE
+    // ET ENSUITE ON VA ENVOYER LE REQUETE AJAX AVEC fetch
+
+    var formulaire = event.target;
+    // ON VA UTILISER UN OBJET DE LA CLASSE FormData
+    // => CET OBJET SERVIRA DE CONTAINER AUX INFOS DU FORMULAIRE
+    var formData = new FormData(formulaire);    
+                                    // => AUTOMATIQUEMENT, 
+                                    // formData VA ASPIRER TOUTES LES INFOS DU formulaire
+                                    // COOL POUR NOUS ;-p
+
+    // MAINTENANT ON PEUT ENVOYER LA REQUETE AJAX AVEC fetch
+    var contenuForm = 
+    {
+        method: 'POST',     // NECESSAIRE POUR UPLOAD DE FICHIER
+        body:   formData
+    };
+    // LA FONCTION fetch DE JS ENVOIE UNE REQUETE AJAX VERS api-ajax.php (le premier paramètre)
+    fetch("api-ajax.php", contenuForm);
+
 };
 formulaire.addEventListener("submit", envoyerFormulaireAjax);
 
