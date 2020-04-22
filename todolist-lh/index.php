@@ -77,11 +77,19 @@ article.ongoing {
                 <!-- temporaire en attendant upload... -->
                 <input type="text" name="photo" required placeholder="entrez la photo">
                 <button type="submit">CREER UNE TACHE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="create">
             </form>
         </section>
 
         <section>
             <h2>AFFICHAGE DES TACHES (READ)</h2>
+            <!-- FORMULAIRE POUR RAFRAICHIR LA LISTE DES TACHES -->
+            <form class="ajax read" action="" method="POST">
+                <button type="submit">RAFRAICHIR LA LISTE DES TACHES</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="read">
+            </form>
             <div class="listTodo">
                 <!--
                 <article>
@@ -128,7 +136,24 @@ article.ongoing {
 // => CODE EN ATTENTE
 // POUR SAVOIR QUE CETTE FONCTION CALLBACK A UN PARAMETRE => DOC DE JS...
 
-var formulaire = document.querySelector("form.ajax");
+// PB: querySeclector NE PERMET DE SELECTIONNER QU'UNE SEULE BALISE
+// MAIS MAINTENANT, ON A PLUSIEURS FORMULAIRES EN AJAX
+// var formulaire = document.querySelector("form.ajax");
+
+var listeFormulaire = document.querySelectorAll("form.ajax");
+// ON FAIT UNE BOUCLE POUR AGIR SUR CHAQUE FORMULAIRE UN PAR UN
+listeFormulaire.forEach(function(formulaire){
+    // POUR CHAQUE FORMULAIRE
+    // ON VA BLOQUER LE FONCTIONNEMENT CLASSIQUE
+    // ET ON VA ENVOYER LES INFOS PAR AJAX
+    formulaire.addEventListener("submit", envoyerFormulaireAjax);
+});
+
+// QUAND ON CHARGE LA PAGE
+// ON VA AUTOMATIQUEMENT DECLENCHER LE CLICK SUR LE FORMULAIRE read
+// => CA EVITE AU VISITEUR DE LE FAIRE
+document.querySelector("form.read button[type=submit]").click();
+
 // LA FONCTION envoyerFormulaireAjax SERA APPELEE PAR JS (PAS PAR MOI)
 //      (ET JS FOURNIRA LE PARAMETRE event...)
 // QUAND IL SE PRODUIRA L'EVENEMENT submit SUR LE FORMULAIRE
@@ -162,7 +187,8 @@ function envoyerFormulaireAjax (event)
     // LA FONCTION fetch DE JS ENVOIE UNE REQUETE AJAX VERS api-ajax.php (le premier paramètre)
     fetch("api-ajax.php", contenuForm)
     // POUR LE READ IL FAUT COMPLETER LE CODE POUR RECUPERER LES DONNEES RENVOYEES PAR LE SERVEUR
-    .then(function(responseServer){
+    .then(function(responseServer) {
+        // EXTRAIRE UN OBJET JS DEPUIS LA REPONSE DU SERVEUR
         return responseServer.json();
     })
     .then(function(objetJSON) {
@@ -177,30 +203,41 @@ function envoyerFormulaireAjax (event)
             tableauArticle = objetJSON.tableauArticle;
             // => CE TABLEAU JSON SERA EN FAIT FOURNI PAR LE SERVEUR WEB (PHP + TABLE SQL)
             // => LES PROPRIETES SERONT CONSTRUITES A PARTIR DES NOMS DES COLONNES SQL
+            rafraichirListeArticle();
 
-            for(var indice=0; indice < tableauArticle.length; indice++)
-            {
-                var article = tableauArticle[indice];
-                var codeHTML = 
-                `
-                            <article class="${article.statut}">
-                                <h3>${article.titre}</h3>
-                                <p>${article.description}</p>
-                                <p>${article.statut}</p>
-                                <p>${article.id}</p>
-                                <img src="${article.photo}">
-                            </article>
-                `;
-                // AJOUTER DANS LA BALISE listTodo
-                var baliseListTodo = document.querySelector(".listTodo");
-                baliseListTodo.innerHTML += codeHTML;
-            }
         }
     })
     ;
 
 };
-formulaire.addEventListener("submit", envoyerFormulaireAjax);
+
+// PROGRAMMATION FONCTIONNELLE
+// => JE RANGE MON CODE DANS DES FONCTIONS
+function rafraichirListeArticle ()
+{
+    // ON REMET LA LISTE A ZERO
+    var baliseListTodo = document.querySelector(".listTodo");
+    baliseListTodo.innerHTML = '';
+
+    for(var indice=0; indice < tableauArticle.length; indice++)
+    {
+        var article = tableauArticle[indice];
+        var codeHTML = 
+        `
+                    <article class="${article.statut}">
+                        <h3>${article.titre}</h3>
+                        <p>${article.description}</p>
+                        <p>${article.statut}</p>
+                        <p>${article.id}</p>
+                        <img src="${article.photo}">
+                    </article>
+        `;
+        // AJOUTER DANS LA BALISE listTodo
+        baliseListTodo.innerHTML += codeHTML;
+    }
+
+}
+
 
 /*
 // VERSION 2: FONCTION ANONYME
