@@ -30,10 +30,10 @@ $tabAssoColonneValeur = [
 $requetePrepareeSQL = 
 <<<CODESQL
 
-INSERT INTO todo
-( titre, description, statut, photo )
-VALUES
-( :titre, :description, :statut, :photo )
+INSERT INTO `todo` 
+(`id`, `titre`, `description`, `statut`, `photo`) 
+VALUES 
+(NULL, :titre, :description, :statut, :photo );
 
 CODESQL;
 
@@ -49,6 +49,9 @@ $pdo = new PDO("mysql:host=localhost;dbname=todolist-lh;charset=utf8", "root", "
 $pdoStatement = $pdo->prepare($requetePrepareeSQL);
 $pdoStatement->execute($tabAssoColonneValeur);
 
+// DEBUG: A ACTIVER SEULEMENT EN CAS DE PROBLEME
+// https://www.php.net/manual/fr/pdostatement.debugdumpparams.php
+// $pdoStatement->debugDumpParams();
 
 // ON VA FOURNIR DU JSON
 echo json_encode($tabAssoReponse, JSON_PRETTY_PRINT);
