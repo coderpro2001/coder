@@ -97,8 +97,7 @@ class Crudite
         (NULL, :titre, :description, :statut, :photo );
     
 CODESQL;
-    
-    
+        
         $pdoStatement = Model::envoyerRequeteSQL($requetePrepareeSQL, $tabAssoColonneValeur);
     
         // ON FAIT AUSSI UN READ APRES LE CREATE POUR RENVOYER LA NOUVELLE LISTE 

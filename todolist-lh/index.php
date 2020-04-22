@@ -6,6 +6,10 @@
     <title>TODOLIST LH</title>
     <style>
 html, body {
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
     font-size:16px;
 }
 * {
@@ -19,6 +23,7 @@ form {
 form > * {
     margin: 0.2rem;
     padding: 0.2rem;
+    font-family: monospace;
 }
 
 .listTodo {
@@ -28,14 +33,14 @@ form > * {
 }
 .listTodo article {
     border:1px solid #aaaaaa;
-    padding: 0.2rem;
-    margin:0.2rem;
-    width: calc(100% / 3 - 0.4rem); /* IL FAUT ENLEVER LE MARGIN */
+    padding: 0.25rem;
+    margin:0.25rem;
+    width: calc(100% / 3 - 0.5rem); /* IL FAUT ENLEVER LE MARGIN */
 }
 
 article img {
     width:100%;
-    height:30vh;
+    height:15vh;
     object-fit:cover;
 }
 
@@ -47,6 +52,26 @@ article.done {
 }
 article.ongoing {
     background-color: orange;
+}
+
+article {
+    transition: all 0.5s;
+}
+article:hover {
+    border:1px solid #ffffff;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.8);
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+}
+
+body > * {
+    max-width:600px;
 }
     </style>
 </head>
@@ -188,6 +213,9 @@ function envoyerFormulaireAjax (event)
     fetch("api-ajax.php", contenuForm)
     // POUR LE READ IL FAUT COMPLETER LE CODE POUR RECUPERER LES DONNEES RENVOYEES PAR LE SERVEUR
     .then(function(responseServer) {
+        // DEBUG
+        console.log(responseServer);
+
         // EXTRAIRE UN OBJET JS DEPUIS LA REPONSE DU SERVEUR
         return responseServer.json();
     })
@@ -211,8 +239,11 @@ function envoyerFormulaireAjax (event)
 
 };
 
+var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
+
 // PROGRAMMATION FONCTIONNELLE
 // => JE RANGE MON CODE DANS DES FONCTIONS
+
 function rafraichirListeArticle ()
 {
     // ON REMET LA LISTE A ZERO
@@ -285,7 +316,6 @@ var tableauArticle = [
 */
 
 
-var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
 
 
     </script>
