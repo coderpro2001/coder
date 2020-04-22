@@ -53,5 +53,33 @@ $pdoStatement->execute($tabAssoColonneValeur);
 // https://www.php.net/manual/fr/pdostatement.debugdumpparams.php
 // $pdoStatement->debugDumpParams();
 
+
+// ON VA AJOUTER LE CODE PHP
+// POUR FAIRE UN READ
+// POUR ENVOYER LA LISTE DES TACHES AU NAVIGATEUR
+$tabAssoColonneValeur = [];
+
+$requetePrepareeSQL = 
+<<<CODESQL
+
+SELECT * FROM todo
+
+CODESQL;
+
+// POUR AJOUTER LA LIGNE DANS LA TABALE SQL
+// ETAPE1: SE CONNECTER A LA BASE DE DONNEES
+// https://www.php.net/manual/fr/pdo.construct.php
+$pdo = new PDO("mysql:host=localhost;dbname=todolist-lh;charset=utf8", "root", "");
+
+// SECURITE: POUR SE PROTEGER CONTRE LES INJECTIONS SQL
+// POUR ENVOYER LA REQUETE
+// ON SEPARE LES INFOS DE LA REQUETE SQL PREPAREE
+$pdoStatement = $pdo->prepare($requetePrepareeSQL);
+$pdoStatement->execute($tabAssoColonneValeur);
+// ON RECUPERE LES LIGNES SQL EN PHP DANS UN TABLEAU ASSOCIATIF
+$tabAssoLigne = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+// JE L'AJOUTE DANS LE TABLEAU DE REPONSE A ENVOYER AU NAVIGATEUR
+$tabAssoReponse["tableauArticle"] = $tabAssoLigne;
+
 // ON VA FOURNIR DU JSON
 echo json_encode($tabAssoReponse, JSON_PRETTY_PRINT);
