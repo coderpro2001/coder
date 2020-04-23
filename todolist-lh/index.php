@@ -114,7 +114,7 @@ body > * {
 
         <section>
             <h2>FORMULAIRE DE MODIFICATION (UPDATE)</h2>
-            <form class="ajax" action="" method="POST">
+            <form class="ajax update" action="" method="POST">
                 <input type="text" name="titre" required placeholder="entrez le titre">
                 <textarea name="description" cols="60" rows="5" required placeholder="entrez la description"></textarea>
                 
@@ -135,7 +135,7 @@ body > * {
                 <input type="text" name="photo" placeholder="entrez la photo">
 
                 <!-- IMPORTANT NE PAS OUBLIER L'ID DE LA LIGNE -->
-                <input type="number" name="id" required placeholder="id de la ligne">
+                <input type="hidden" name="id" required placeholder="id de la ligne">
 
                 <button type="submit">MODIFIER UNE TACHE</button>
                 <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
@@ -307,7 +307,7 @@ function rafraichirListeArticle ()
                         <p>${article.statut}</p>
                         <p>${article.id}</p>
                         <img src="${article.photo}">
-                        <button class="update" data-id="${article.id}">modifier</button>
+                        <button class="update" data-indice="${indice}" data-id="${article.id}">modifier</button>
                         <button class="delete" data-id="${article.id}">supprimer</button>
                     </article>
         `;
@@ -325,6 +325,44 @@ function rafraichirListeArticle ()
     listeBoutonSupprimer.forEach(function(bouton) {
         bouton.addEventListener("click", supprimerLigne);
     });
+
+
+    var listeBoutonModifier = document.querySelectorAll(".listTodo button.update");
+    listeBoutonModifier.forEach(function(bouton) {
+        bouton.addEventListener("click", modifierLigne);
+    });
+
+}
+
+
+function modifierLigne (event)
+{
+    // DEBUG
+    console.log(event.target);
+    var bouton = event.target;
+    // JE RECUPERE indice CORRESPONDANT DANS tableauArticle
+    var indice = bouton.getAttribute("data-indice");
+    var article = tableauArticle[indice];
+    // DEBUG
+    console.log(article);
+
+    // MAINTENANT IL FAUT COPIER LES INFOS DANS LE FORMULAIRE
+    // id, titre, description, statut, photo
+    document.querySelector("form.update input[name=id]").value = article.id;
+    document.querySelector("form.update input[name=titre]").value = article.titre;
+    document.querySelector("form.update textarea[name=description]").value = article.description;
+    document.querySelector("form.update input[name=photo]").value = article.photo;
+
+    // PB: COMME ON UTILISE 3 BALISES radio POUR LE STATUT... CA NE MARCHE PAS COMME POUR LES text...
+    // document.querySelector("form.update input[name=statut]").value = article.statut;
+    // => IL FAUT CHOISIR LA BONNE BALISE ET LUI RAJOUTER L'ATTRIBUT checked
+    // ASTUCE: JE VAIS ME SERVIR DE article.statut POUR CONSTRUIRE LE SELECTEUR DE LA BONNE BALISE radio
+    // "form.update input[value=todo]"
+    // "form.update input[value=ongoing]"
+    // "form.update input[value=done]"
+    var selecteurRadio = "form.update input[value=" + article.statut + "]";
+    // JE SELECTIONNE EN CSS LA BONNE BALISE radio ET JE LA CHECK EN HTML
+    document.querySelector(selecteurRadio).checked = true;
 }
 
 // FONCTION DE CALLBACK SUR LE CLICK DU BOUTON SUPPRIMER

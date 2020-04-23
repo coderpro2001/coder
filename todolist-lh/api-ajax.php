@@ -65,6 +65,8 @@ class Crudite
     // UPDATE
     static function modifier ()
     {
+        // TODO: AJOUTER SECURITE... 
+
         // ON VA MAINTENANT RECUPERER CHAQUE INFO DU FORMULAIRE
         // ET ENSUITE LES STOCKER DANS LA TABLE SQL todo
         $tabAssoColonneValeur = [
@@ -102,6 +104,8 @@ CODESQL;
     // DELETE
     static function supprimer ()
     {
+        // TODO: AJOUTER SECURITE... 
+
         // ON VA MAINTENANT RECUPERER CHAQUE INFO DU FORMULAIRE
         // ET ENSUITE LES STOCKER DANS LA TABLE SQL todo
         $tabAssoColonneValeur = [
@@ -128,6 +132,8 @@ CODESQL;
     // CREATE
     static function creer ()
     {
+        // TODO: AJOUTER SECURITE... 
+
         // ON VA MAINTENANT RECUPERER CHAQUE INFO DU FORMULAIRE
         // ET ENSUITE LES STOCKER DANS LA TABLE SQL todo
         $tabAssoColonneValeur = [
