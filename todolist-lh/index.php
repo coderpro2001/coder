@@ -220,6 +220,9 @@ body > * {
 // MAIS MAINTENANT, ON A PLUSIEURS FORMULAIRES EN AJAX
 // var formulaire = document.querySelector("form.ajax");
 
+// ON DEFINIT LE TABLEAU ICI
+var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
+
 var listeFormulaire = document.querySelectorAll("form.ajax");
 // ON FAIT UNE BOUCLE POUR AGIR SUR CHAQUE FORMULAIRE UN PAR UN
 listeFormulaire.forEach(function(formulaire){
@@ -294,7 +297,6 @@ function envoyerFormulaireAjax (event)
 
 };
 
-var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
 
 // PROGRAMMATION FONCTIONNELLE
 // => JE RANGE MON CODE DANS DES FONCTIONS
@@ -355,7 +357,7 @@ function modifierLigne (event)
     // DEBUG
     console.log(article);
 
-    // MAINTENANT IL FAUT COPIER LES INFOS DANS LE FORMULAIRE
+    // MAINTENANT IL FAUT COPIER LES INFOS DANS LE FORMULAIRE UPDATE
     // id, titre, description, statut, photo
     document.querySelector("form.update input[name=id]").value = article.id;
     document.querySelector("form.update input[name=titre]").value = article.titre;

@@ -21,18 +21,18 @@
 class Crudite
 {
     // PROPRIETE DE CLASSE (static)
-    static $tabAssoReponse = [];
+    static $tabAssoReponse = [];    // AU DEPART LE TABLEAU EST VIDE
 
     // METHODE DE CLASSE (static)
     static function cruder ()
     {
         // DEBUG
         // ON VA RENVOYER CE QU'ON RECOIT...
+        // JE RAJOUTE UN NOUVEL ELEMENT DANS LE TABLEAU
         Crudite::$tabAssoReponse["request"] = $_REQUEST;
         
         $identifiantFormulaire = $_REQUEST["identifiantFormulaire"] ?? "";
-        
-        
+                
         if ($identifiantFormulaire == "create")
         {
             Crudite::creer();
