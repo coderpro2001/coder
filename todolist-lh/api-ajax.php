@@ -65,13 +65,64 @@ class Crudite
     // UPDATE
     static function modifier ()
     {
-        // ...
+        // ON VA MAINTENANT RECUPERER CHAQUE INFO DU FORMULAIRE
+        // ET ENSUITE LES STOCKER DANS LA TABLE SQL todo
+        $tabAssoColonneValeur = [
+            // COLONNE SQL      HTML
+            // "titre"          name="titre"
+            "id"            =>  $_REQUEST["id"] ?? "",          // IMPORTANT
+            "titre"         =>  $_REQUEST["titre"] ?? "",
+            "description"   =>  $_REQUEST["description"] ?? "",
+            "statut"        =>  $_REQUEST["statut"] ?? "",
+            "photo"         =>  $_REQUEST["photo"] ?? "",
+        ];
+    
+        // IL FAUDRA GERER A PART LE CAS DE L'UPLOAD QUI DEVIENT OPTIONNEL
+        // ... 
+        
+        $requetePrepareeSQL = 
+<<<CODESQL
+    
+        UPDATE todo
+        SET
+            titre       = :titre,
+            description = :description,
+            statut      = :statut,
+            photo       = :photo
+        WHERE id = :id
+CODESQL;
+        
+        $pdoStatement = Model::envoyerRequeteSQL($requetePrepareeSQL, $tabAssoColonneValeur);
+    
+        // ON FAIT AUSSI UN READ APRES LE CREATE POUR RENVOYER LA NOUVELLE LISTE 
+        // AVEC LA TACHE QUI VIENT D'ETRE CREE... 
+        Crudite::lire();
     }
 
     // DELETE
     static function supprimer ()
     {
-        // ...
+        // ON VA MAINTENANT RECUPERER CHAQUE INFO DU FORMULAIRE
+        // ET ENSUITE LES STOCKER DANS LA TABLE SQL todo
+        $tabAssoColonneValeur = [
+            // COLONNE SQL      HTML
+            // "titre"          name="titre"
+            "id"         =>  $_REQUEST["id"] ?? "",
+        ];
+    
+        $requetePrepareeSQL = 
+<<<CODESQL
+    
+        DELETE FROM todo
+        WHERE id = :id
+
+CODESQL;
+        
+        $pdoStatement = Model::envoyerRequeteSQL($requetePrepareeSQL, $tabAssoColonneValeur);
+    
+        // ON FAIT AUSSI UN READ APRES LE DELETE POUR RENVOYER LA NOUVELLE LISTE 
+        // AVEC LA TACHE QUI VIENT D'ETRE CREE... 
+        Crudite::lire();
     }
 
     // CREATE

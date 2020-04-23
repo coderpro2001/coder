@@ -73,6 +73,10 @@ body {
 body > * {
     max-width:600px;
 }
+
+.cache {
+    display: none;
+}
     </style>
 </head>
 <body>
@@ -80,6 +84,7 @@ body > * {
         <h1>MA TODOLIST LH</h1>
     </header>
     <main>
+
         <section>
             <h2>FORMULAIRE DE CREATION (CREATE)</h2>
             <form class="ajax" action="" method="POST">
@@ -104,6 +109,47 @@ body > * {
                 <button type="submit">CREER UNE TACHE</button>
                 <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
                 <input type="hidden" name="identifiantFormulaire" value="create">
+            </form>
+        </section>
+
+        <section>
+            <h2>FORMULAIRE DE MODIFICATION (UPDATE)</h2>
+            <form class="ajax" action="" method="POST">
+                <input type="text" name="titre" required placeholder="entrez le titre">
+                <textarea name="description" cols="60" rows="5" required placeholder="entrez la description"></textarea>
+                
+                <label>
+                    <input type="radio" name="statut" value="todo" required placeholder="entrez le statut">
+                    <span>todo</span>
+                </label>
+                <label>
+                    <input type="radio" name="statut" value="ongoing" required placeholder="entrez le statut">
+                    <span>ongoing</span>
+                </label>
+                <label>
+                    <input type="radio" name="statut" value="done" required placeholder="entrez le statut">
+                    <span>done</span>
+                </label>
+
+                <!-- temporaire en attendant upload... -->
+                <input type="text" name="photo" placeholder="entrez la photo">
+
+                <!-- IMPORTANT NE PAS OUBLIER L'ID DE LA LIGNE -->
+                <input type="number" name="id" required placeholder="id de la ligne">
+
+                <button type="submit">MODIFIER UNE TACHE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="update">
+            </form>
+        </section>
+
+        <section class="cache">
+            <h2>FORMULAIRE DE DELETE</h2>
+            <form class="ajax delete" action="">
+                <input type="number" name="id" required placeholder="id de la ligne">
+                <button type="submit">SUPPRIMER LA LIGNE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="delete">
             </form>
         </section>
 
@@ -261,14 +307,42 @@ function rafraichirListeArticle ()
                         <p>${article.statut}</p>
                         <p>${article.id}</p>
                         <img src="${article.photo}">
+                        <button class="update" data-id="${article.id}">modifier</button>
+                        <button class="delete" data-id="${article.id}">supprimer</button>
                     </article>
         `;
         // AJOUTER DANS LA BALISE listTodo
         baliseListTodo.innerHTML += codeHTML;
     }
 
+    // CHRONOLOGIE: 
+    // JE DOIS ATTENDRE QUE LES BOUTONS SOIENT RAJOUTES AVEC LES ARTICLES
+    // ET ENSUITE JE PEUX AJOUTER LES EVENT LISTENER DESSUS
+
+    // UNE FOIS QU'ON A CREE LES ARTICLES AVEC LES BOUTONS SUPPRIMER
+    // ON VA AJOUTER UN EVENT LISTENER SUR CHAQUE BOUTON
+    var listeBoutonSupprimer = document.querySelectorAll(".listTodo button.delete");
+    listeBoutonSupprimer.forEach(function(bouton) {
+        bouton.addEventListener("click", supprimerLigne);
+    });
 }
 
+// FONCTION DE CALLBACK SUR LE CLICK DU BOUTON SUPPRIMER
+function supprimerLigne (event)
+{
+    // DEBUG
+    console.log(event.target);
+    var bouton = event.target;
+    // JE RECUPERE id DE LA LIGNE A SUPPRIMER
+    var id = bouton.getAttribute("data-id");
+    // ET JE COPIE id DANS LE FORMULAIRE
+    var inputId = document.querySelector("form.delete input[name=id]");
+    inputId.value = id;
+
+    // MAINTENANT ON VA DECLENCHER L'ENVOI DU FORMULAIRE DE DELETE
+    // document.querySelector("form.delete").submit(); // ENVOI SANS AJAX
+    document.querySelector("form.delete button[type=submit]").click();
+}
 
 /*
 // VERSION 2: FONCTION ANONYME
