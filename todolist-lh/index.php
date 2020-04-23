@@ -15,27 +15,36 @@ html, body {
 * {
     box-sizing: border-box;
 }
-
+h1, h2, h3 {
+    padding:0.5rem;
+    text-align:center;
+    margin:0;
+}
 form {
     display: flex;
     flex-direction: column;
+    width:100%;
+    padding:1rem;
 }        
 form > * {
     margin: 0.2rem;
     padding: 0.2rem;
     font-family: monospace;
+    width:100%;
 }
 
 .listTodo {
     display:flex;
     flex-wrap: wrap;
     width:100%;
+    justify-content: center;
 }
 .listTodo article {
     border:1px solid #aaaaaa;
     padding: 0.25rem;
     margin:0.25rem;
     width: calc(100% / 3 - 0.5rem); /* IL FAUT ENLEVER LE MARGIN */
+    min-width:200px;
 }
 
 article img {
@@ -71,7 +80,7 @@ body {
 }
 
 body > * {
-    max-width:600px;
+    max-width:960px;
 }
 
 .cache {
