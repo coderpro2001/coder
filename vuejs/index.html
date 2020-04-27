@@ -57,23 +57,24 @@
 
 /*
 // VERSION NON COMPACTE
-var dataObjet   = 
+var objetData   = 
 {
     message: 'Hello Vue !'
 };
 
-var paramConfig = 
+var objetParam = 
 {
   el: '#app',       // SELECTEUR CSS QUI PERMET DE SELECTIONNER LA BALISE HTML QUI DELIMITE L'ACTION DE VUEJS
-  data: dataObjet
+  data: objetData
 };
 
-var app = new Vue(paramConfig);
+var app = new Vue(objetParam);
+
 */
 
 // VERSION COMPACTE
 var app = new Vue({
-    el: '#app',
+    el: '#app',     // SELECTEUR CSS QUI PERMET DE SELECTIONNER LA BALISE HTML QUI DELIMITE L'ACTION DE VUEJS
     data: {
         todos: 
         [
