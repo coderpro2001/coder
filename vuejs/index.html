@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+* {
+    box-sizing: border-box;
+}
+.listeArticle {
+    display:flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+.listeArticle article {
+    border:1px solid lightgreen;
+    width: calc(100% / 3);
+}         
+
+    </style>
 </head>
 <body>
     <header>
@@ -12,6 +27,7 @@
     <main>
         <!-- ETAPE2: DELIMITER LA ZONE D'ACTION DE VUEJS -->
         <div id="app">
+
             <section>
                 <h2>exemple basique: vuejs remplace du code dans le html</h2>
                 <div>{{ message }}</div>
@@ -20,6 +36,11 @@
             <section>
                 <h2>exemple sur un attribut html</h2>
                 <span v-bind:title="message">
+                    Passez votre souris sur moi pendant quelques secondes
+                    pour voir mon titre lié dynamiquement !
+                </span>    
+                <!-- NOTATION RACCOURCI AVEC SEULEMENT : AU LIEU DE v-bind: -->
+                <span :title="message">
                     Passez votre souris sur moi pendant quelques secondes
                     pour voir mon titre lié dynamiquement !
                 </span>    
@@ -32,13 +53,28 @@
 
             <section>
                 <h2>BOUCLE AVEC VUEJS</h2>
-                <ol>
-                    <li v-for="todo in todos">
-                      {{ todo.titre }}
-                    </li>
-                </ol>
+                <div class="listeArticle">
+                    <article v-for="todo in todos">
+                      <h3>{{ todo.titre }}</h3>
+                    </article>
+                </div>
             </section>
-        </div>
+
+            <section>
+                <h2>EXEMPLE DE CLICK AVEC BOUTON</h2>
+                <p>{{ message }}</p>
+                <button v-on:click="reverseMessage">cliquer sur le bouton pour changer le message</button>
+                <!-- NOTATION RACCOURCI @ AU LIEU DE v-on: (PENSER A UNE OREILLE @ => Listener / ECOUTER...) -->
+                <button @click="reverseMessage">cliquer sur le bouton pour changer le message</button>
+            </section>
+
+            <section>
+                <h2>EXEMPLE AVEC FORMULAIRE</h2>
+                <p>{{ message }}</p>
+                <input type="text" name="nom" v-model="message">
+            </section>
+
+        </div><!-- FIN DE #app-->
 
     </main>
     <footer>
@@ -59,6 +95,7 @@
 // VERSION NON COMPACTE
 var objetData   = 
 {
+    // ICI LE DEV PEUT CREER SES VARIABLES
     message: 'Hello Vue !'
 };
 
@@ -72,11 +109,16 @@ var app = new Vue(objetParam);
 
 */
 
+// ON PEUT AVOIR NOTRE CODE JS
+var compteur = 0;
+
 // VERSION COMPACTE
 var app = new Vue({
     el: '#app',     // SELECTEUR CSS QUI PERMET DE SELECTIONNER LA BALISE HTML QUI DELIMITE L'ACTION DE VUEJS
-    data: {
+    data: 
+    {
         todos: 
+        // JSON ;-p
         [
             { titre: 'Apprendre JavaScript' },
             { titre: 'Apprendre Vue' },
@@ -84,7 +126,34 @@ var app = new Vue({
         ],
         seen: true,
         message: 'Hello Vue !'
+    },
+    methods: 
+    {
+        reverseMessage: function () 
+        {
+            // ON INVERSE L'ORDRE DES LETTRES
+            this.message = this.message.split('').reverse().join('');
+        }
+    },
+    beforeCreate: function () {
+        // `this` est une référence à l'instance de vm
+        console.log('VUEJS VA APPELER CE CODE SUR ETAPE beforeCreate');
+    },
+    created: function () {
+        // `this` est une référence à l'instance de vm
+        console.log('VUEJS VA APPELER CE CODE SUR ETAPE created');
+    },
+    beforeUpdate: function () {
+        // `this` est une référence à l'instance de vm
+        console.log('VUEJS VA APPELER CE CODE SUR ETAPE beforeUpdate');
+    },
+    updated: function () {
+        // `this` est une référence à l'instance de vm
+        console.log('VUEJS VA APPELER CE CODE SUR ETAPE updated');
+        // ON A ENVIE DE COMPTER LE NOMBRE D'UPDATE
+        console.log(compteur++);
     }
+
 });
 
     </script>
