@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>VUEJS</h1>
+    </header>
+    <main>
+        <!-- ETAPE2: DELIMITER LA ZONE D'ACTION DE VUEJS -->
+        <div id="app">
+            <section>
+                <h2>exemple basique: vuejs remplace du code dans le html</h2>
+                <div>{{ message }}</div>
+            </section>
+
+            <section>
+                <h2>exemple sur un attribut html</h2>
+                <span v-bind:title="message">
+                    Passez votre souris sur moi pendant quelques secondes
+                    pour voir mon titre lié dynamiquement !
+                </span>    
+            </section>
+
+            <section>
+                <h2>conditions avec vuejs</h2>
+                <p v-if="seen">Maintenant vous me voyez</p>
+            </section>
+
+            <section>
+                <h2>BOUCLE AVEC VUEJS</h2>
+                <ol>
+                    <li v-for="todo in todos">
+                      {{ todo.titre }}
+                    </li>
+                </ol>
+            </section>
+        </div>
+
+    </main>
+    <footer>
+        <p>tous droits réservés</p>
+    </footer>
+
+    <!-- ETAPE 1 -->
+    <!-- ON CHARGE LE CODE DE VUEJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- ETAPE 3 : RELIER MA PAGE AVEC VUEJS -->
+    <script>
+
+// ON CREE UNE VARIABLE app 
+// ET ON STOCKE COMME VALEUR UN OBJET CREE DEPUIS LA CLASSE Vue
+
+/*
+// VERSION NON COMPACTE
+var dataObjet   = 
+{
+    message: 'Hello Vue !'
+};
+
+var paramConfig = 
+{
+  el: '#app',       // SELECTEUR CSS QUI PERMET DE SELECTIONNER LA BALISE HTML QUI DELIMITE L'ACTION DE VUEJS
+  data: dataObjet
+};
+
+var app = new Vue(paramConfig);
+*/
+
+// VERSION COMPACTE
+var app = new Vue({
+    el: '#app',
+    data: {
+        todos: 
+        [
+            { titre: 'Apprendre JavaScript' },
+            { titre: 'Apprendre Vue' },
+            { titre: 'Créer quelque chose de génial' }
+        ],
+        seen: true,
+        message: 'Hello Vue !'
+    }
+});
+
+    </script>
+</body>
+</html>
