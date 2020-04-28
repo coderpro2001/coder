@@ -18,6 +18,12 @@
     width: calc(100% / 3);
 }         
 
+
+article.active {
+    background-color: lightgreen;
+    display:none;
+}
+
     </style>
 </head>
 <body>
@@ -63,6 +69,8 @@
             <section>
                 <h2>EXEMPLE DE CLICK AVEC BOUTON</h2>
                 <p>{{ message }}</p>
+                <p>{{ messageInverse }}</p>
+
                 <button v-on:click="reverseMessage">cliquer sur le bouton pour changer le message</button>
                 <!-- NOTATION RACCOURCI @ AU LIEU DE v-on: (PENSER A UNE OREILLE @ => Listener / ECOUTER...) -->
                 <button @click="reverseMessage">cliquer sur le bouton pour changer le message</button>
@@ -73,6 +81,30 @@
                 <p>{{ message }}</p>
                 <input type="text" name="nom" v-model="message">
             </section>
+
+            <section>
+                <h2>EXEMPLE AVEC PROPRIETE COMPUTED</h2>
+                <input type="number" v-model="quantite">
+                <input type="number" v-model="prixUnitaire">
+                <h3>{{ quantite * prixUnitaire }}</h3>
+                <!-- SI LE CODE EST TROP LONG, ON PEUT LE DEPLACER DANS JS DANS LES PROPRIETES computed -->
+                <h3>{{ prixProduit }}</h3>
+            </section>
+
+            <section>
+                <h2>EXEMPLE AVEC UNE CLASSE CSS</h2>
+                <button @click="isActive = !isActive">interrupteur</button>
+                <article :class="{ active : isActive }">
+                    <h3>TITRE DE MON ARTICLE</h3>
+                </article>
+            </section>
+
+            <section>
+                <h2>EXEMPLE AVEC ATTRIBUT style</h2>
+                <input type="color" v-model="activeColor">
+                <input type="range" v-model="fontSize" min="10" max="100"><span>{{ fontSize }}</span>  
+                <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">LIGNE DE TEXTE</div>
+            </section>    
 
         </div><!-- FIN DE #app-->
 
@@ -117,6 +149,11 @@ var app = new Vue({
     el: '#app',     // SELECTEUR CSS QUI PERMET DE SELECTIONNER LA BALISE HTML QUI DELIMITE L'ACTION DE VUEJS
     data: 
     {
+        activeColor: 'orange',
+        fontSize: 12,
+        isActive : true,
+        quantite: 0,
+        prixUnitaire: 1,
         todos: 
         // JSON ;-p
         [
@@ -126,6 +163,20 @@ var app = new Vue({
         ],
         seen: true,
         message: 'Hello Vue !'
+    },
+    computed: {
+        // JE PEUX AJOUTER MES PROPRIETES DANS L'OBJET computed
+        // ET MES PROPRIETES SONT DES FONCTIONS
+        prixProduit : function ()
+        {
+            // ATTENTION, IL FAUT METTRE this
+            return this.quantite * this.prixUnitaire;
+        },
+        // un accesseur (getter) calculé
+        messageInverse : function () {
+            // `this` pointe sur l'instance vm
+            return this.message.split('').reverse().join('')
+        }
     },
     methods: 
     {
