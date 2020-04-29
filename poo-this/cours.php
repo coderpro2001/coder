@@ -4,21 +4,24 @@
 class User
 {
     // COLLECTIF
-    // PROPRIETES static
-    static $nbPied = 2;
+
+    // PROPRIETES static DE CLASSE
+    static $nbPied          = 2;             // PAR DEFAUT public
+    public static $nbYeux   = 2;
 
     // METHODES STATIC DE CLASSE
-    static function getNbPied ()
+    static function getNbPied ()    // PAR DEFAUT public
     {
         return User::$nbPied;
     }
 
     // INDIVIDUEL 
+
     // PROPRIETES D'OBJET
-    public $login = "";
+    public $login = "";     // COMME POSSIBILITES public OU protected OU private
 
     // METHODES D'OBJET
-    function getLogin ()
+    function getLogin ()    // PAR DEFAUT public    
     {
         // https://www.php.net/manual/fr/function.var-dump.php
         var_dump($this);
