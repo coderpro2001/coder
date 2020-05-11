@@ -77,6 +77,8 @@ CODESQL;
         foreach($tabResult as $tabLigne)
         {
             extract($tabLigne);
+            // => VA CREER LES VARIABLES A PARTIR DES NOMS DE COLONNE
+            // => $id, $filename, $titre, $contenu, $image
         }
 
         // ET SI ON AJOUTE UN CRUD SUR CETTE TABLE SQL
@@ -97,10 +99,18 @@ CODESQL;
 
     // PHP VA APPELER CETTE METHODE QUAND PHP AURA BESOIN D'UNE CLASSE
     // ET PHP FOURNIRA LA VALEUR AU PARAMETRE
+    // EXEMPLE: SI ON ECRIT CE CODE
+    // $test = new Test
+    //                  => PHP VA APPELER App::chargerCodeClass("Test");
     static function chargerCodeClass ($className)
     {
         // DEBUG
         // echo "(PHP A BESOIN DE $className)";
+        
+        // ASTUCE: POUR AUTOMATISER LE CHARGEMENT DE CODE
+        //      ON PREND COMME CONVENTION QUE LA CLASSE Test 
+        //      SERA DANS LE FICHIER php/class/Test.php
+
         // IL FAUT AJOUTER LE CODE QUI CHARGE LE FICHIER 
         // QUI CONTIENT LA DEFINITION DE LA CLASSE
         require_once "php/class/$className.php";
