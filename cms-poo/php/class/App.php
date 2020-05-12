@@ -52,6 +52,19 @@ class App
         extract(pathinfo($path));
         // => EXTRAIRE LE NOM DU FICHIER SANS L'EXTENSION DANS $filename
 
+        // PAR DEFAUT, ON UTILISE LE TEMPLATE defaut
+        $templateActif = "defaut";
+        if ($filename == "api")
+        {
+            // ON BASCULE SUR LE TEMPLATE api
+            $templateActif = "api";
+        }
+        if ($filename == "admin")
+        {
+            // ON BASCULE SUR LE TEMPLATE api
+            $templateActif = "admin";
+        }
+
         // SI JE GARDE LE CONTENU DE MON SITE DANS UNE TABLE SQL
         // IL FAUT AVOIR UNE LIGNE PAR PAGE A AFFICHER
         // TABLE SQL    page
@@ -60,20 +73,9 @@ class App
         //      titre       VARCHAR(160)
         //      contenu     TEXT
         //      image       VARCHAR(160)
-        // ON A JUSTE A FAIRE UNE REQUETE SQL POUR RECUPERER LE CONTENU ASSOCIE A $filename
-        $requeteSQL =
-<<<CODESQL
 
-SELECT * FROM page
-WHERE filename = :filename;
+        $tabResult = Model::read("page", "filename", $filename);    // (PHP CHARGE TOUT SEUL LE CODE DE Model...)
 
-CODESQL;
-
-        $pdo = new PDO("mysql:host=localhost;dbname=cms-poo;charset=utf8", "root", "");
-        $pdoStatement = $pdo->prepare($requeteSQL);
-        $pdoStatement->execute([ "filename" => $filename ]);
-
-        $tabResult = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
         foreach($tabResult as $tabLigne)
         {
             extract($tabLigne);
@@ -91,9 +93,7 @@ CODESQL;
         //  GRAPHISTE QUI TRAVAILLE AVEC DES OUTILS PHOTOSHOP, ILLUSTRATOR, AFFINITY, FIGMA, etc... 
         //  INTEGRATEUR QUI CREE LES TEMPLATES HTML, CSS, JS
         //  ENFIN LE DEV DECOUPE CES TEMPLATES EN FICHIERS PHP... 
-        require_once "php/view/header.php";
-        require_once "php/view/section.php";
-        require_once "php/view/footer.php";
+        require_once "php/view/template-$templateActif.php";
 
     }
 
