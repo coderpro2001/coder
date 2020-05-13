@@ -2,6 +2,27 @@
 
 class App 
 {
+    // PHP VA APPELER CETTE METHODE QUAND PHP AURA BESOIN D'UNE CLASSE
+    // ET PHP FOURNIRA LA VALEUR AU PARAMETRE
+    // EXEMPLE: SI ON ECRIT CE CODE
+    // $test = new Test;
+    // OU
+    // Test::faireTravail();
+    //                  => PHP VA APPELER App::chargerCodeClass("Test");
+    static function chargerCodeClass ($className)
+    {
+        // DEBUG
+        // echo "(PHP A BESOIN DE $className)";
+        
+        // ASTUCE: POUR AUTOMATISER LE CHARGEMENT DE CODE
+        //      ON PREND COMME CONVENTION QUE LA CLASSE Test 
+        //      SERA DANS LE FICHIER php/class/Test.php
+
+        // IL FAUT AJOUTER LE CODE QUI CHARGE LE FICHIER 
+        // QUI CONTIENT LA DEFINITION DE LA CLASSE
+        require_once "php/class/$className.php";
+    }
+
     // METHODES STATIC (COLLECTIF)
     // ON CREE UNE PREMIERE METHODE DANS NOTRE CLASSE
     static function start ()
@@ -54,7 +75,7 @@ class App
 
         // PAR DEFAUT, ON UTILISE LE TEMPLATE defaut
         $templateActif = "defaut";
-        
+
         // ON VA GARDER DES PAGES "SPECIALES" SANS LES AVOIR DANS LA TABLE SQL page
         // CA PERMET D'ASSOCIER UN $filename AVEC UN FICHIER TEMPLATE DIRECTEMENT...
         // (ON POURRAIT AJOUTER UNE COLONNE template DANS LA TABLE page POUR POUVOIR LE GERER DANS SQL...)
@@ -113,23 +134,5 @@ class App
 
     }
 
-    // PHP VA APPELER CETTE METHODE QUAND PHP AURA BESOIN D'UNE CLASSE
-    // ET PHP FOURNIRA LA VALEUR AU PARAMETRE
-    // EXEMPLE: SI ON ECRIT CE CODE
-    // $test = new Test
-    //                  => PHP VA APPELER App::chargerCodeClass("Test");
-    static function chargerCodeClass ($className)
-    {
-        // DEBUG
-        // echo "(PHP A BESOIN DE $className)";
-        
-        // ASTUCE: POUR AUTOMATISER LE CHARGEMENT DE CODE
-        //      ON PREND COMME CONVENTION QUE LA CLASSE Test 
-        //      SERA DANS LE FICHIER php/class/Test.php
-
-        // IL FAUT AJOUTER LE CODE QUI CHARGE LE FICHIER 
-        // QUI CONTIENT LA DEFINITION DE LA CLASSE
-        require_once "php/class/$className.php";
-    }
 
 }
