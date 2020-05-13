@@ -53,6 +53,7 @@ mc.cbAjax = function (event)
         if ('cleApi' in json)
         {
             // ON VA LE MEMORISER DANS sessionStorage
+            // POUR POUVOIR LE REUTILISER SUR LA PAGE admin
             sessionStorage.setItem('cleApi', json.cleApi);
         }
 

@@ -64,6 +64,11 @@ class App
             // ON BASCULE SUR LE TEMPLATE api
             $templateActif = "admin";
         }
+        if ($filename == "logout")
+        {
+            // ON BASCULE SUR LE TEMPLATE api
+            $templateActif = "logout";
+        }
 
         // SI JE GARDE LE CONTENU DE MON SITE DANS UNE TABLE SQL
         // IL FAUT AVOIR UNE LIGNE PAR PAGE A AFFICHER

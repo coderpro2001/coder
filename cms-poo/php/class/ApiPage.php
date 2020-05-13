@@ -7,8 +7,11 @@ class ApiPage
         // ON VEUT VERIFIER QUE LE VISITEUR A BIEN DE LE DROIT DE FAIRE CETTE ACTION
         $cleApi = $_REQUEST["cleApi"] ?? "";
 
+        // SI LA CLE API N'EST PAS CORRECTE ALORS ON ARRETE LA METHODE
         if ($cleApi != "TEXTE-SECRET-FOURNI-PAR-LE-LOGIN")
-            return;
+        {
+            return; // ON NE FAIT LE CODE APRES, ON ARRETE LA METHODE
+        }
 
         // ICI, ON VA TRAITER LE FORMULAIRE DE create
         // RECUPERER LES INFOS DU FORMULAIRE

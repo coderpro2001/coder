@@ -33,6 +33,7 @@ form > * {
                 <a href="presentation.php">présentation</a>
                 <a href="contact.php">contact</a>
                 <a href="admin.php">admin</a>
+                <a href="logout.php">logout</a>
             </nav>
         </header>
         <main>
@@ -51,7 +52,7 @@ form > * {
                     <input type="hidden" name="classeApi" value="Page">
                     <input type="hidden" name="methodeApi" value="create">
                     <!-- AJOUTER UNE CLE API FOURNIE AU MOMENT DU LOGIN -->
-                    <input type="text" name="cleApi" value="">
+                    <input type="text" name="cleApi" v-model="cleApi" placeholder="cleApi">
                 </form>
             </section>
         </main>
@@ -68,6 +69,13 @@ form > * {
     <script>
 var app = new Vue({
   el: '#app',
+  // CETTE METHODE SERA APPELEE AUTOMATIQUEMENT PAR VUEJS A L'ETAPE mounted
+  // https://fr.vuejs.org/v2/guide/instance.html#Diagramme-du-cycle-de-vie
+  mounted: function () {
+        // ON VA RECUPERER LA VALEUR DE cleApi
+        // QUI EST DANS SESSION STORAGE
+        this.cleApi = sessionStorage.getItem('cleApi');
+  },
   methods: {
     envoyerFormAjax: function (event)
     {
@@ -94,7 +102,9 @@ var app = new Vue({
 
     }
   },
+  // ON A LES VARIABLES GEREES PAR VUEJS
   data: {
+    cleApi: '',
     message: 'Hello Vue!'
   }
 })        
