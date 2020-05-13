@@ -27,9 +27,6 @@ class App
     // ON CREE UNE PREMIERE METHODE DANS NOTRE CLASSE
     static function start ()
     {
-        // DEBUG
-        // echo "(start)";
-
         // INSTALLER LE CHARGEMENT AUTOMATIQUE DE CLASSE
         // https://www.php.net/manual/fr/function.spl-autoload-register.php
         spl_autoload_register("App::chargerCodeClass");
