@@ -54,6 +54,11 @@ class App
 
         // PAR DEFAUT, ON UTILISE LE TEMPLATE defaut
         $templateActif = "defaut";
+        
+        // ON VA GARDER DES PAGES "SPECIALES" SANS LES AVOIR DANS LA TABLE SQL page
+        // CA PERMET D'ASSOCIER UN $filename AVEC UN FICHIER TEMPLATE DIRECTEMENT...
+        // (ON POURRAIT AJOUTER UNE COLONNE template DANS LA TABLE page POUR POUVOIR LE GERER DANS SQL...)
+
         if ($filename == "api")
         {
             // ON BASCULE SUR LE TEMPLATE api
@@ -61,12 +66,12 @@ class App
         }
         if ($filename == "admin")
         {
-            // ON BASCULE SUR LE TEMPLATE api
+            // ON BASCULE SUR LE TEMPLATE admin
             $templateActif = "admin";
         }
         if ($filename == "logout")
         {
-            // ON BASCULE SUR LE TEMPLATE api
+            // ON BASCULE SUR LE TEMPLATE logout
             $templateActif = "logout";
         }
 
@@ -79,6 +84,12 @@ class App
         //      contenu     TEXT
         //      image       VARCHAR(160)
 
+        // "page"       EST LE NOM DE LA TABLE
+        // "filename"   EST LE NOM DE LA COLONNE
+        // $filename    EST LA VALEUR CHERCHEE POUR SELECTIONNER LA BONNE LIGNE
+        /*
+            SELECT * FROM page WHERE filename = '$filename'
+        */
         $tabResult = Model::read("page", "filename", $filename);    // (PHP CHARGE TOUT SEUL LE CODE DE Model...)
 
         foreach($tabResult as $tabLigne)
