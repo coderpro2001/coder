@@ -99,4 +99,14 @@ CODESQL;
 
     }
 
+
+    static function update ()
+    {
+        // ...
+    }
+
+    static function delete ()
+    {
+        // ...
+    }
 }
