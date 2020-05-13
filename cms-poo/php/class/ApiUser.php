@@ -60,6 +60,9 @@ CODESQL;
         foreach($tabResult as $tabLigne)
         {
             extract($tabLigne);
+            // => CREE LES VARIABLES A PARTIR DES COLONNES
+            // $id, $login, $email, $password, $level
+            // ATTENTION: $password EST LE MOT DE PASSE HASHE
         }
         // => CREE UNE VARIABLE PAR COLONNE $id, $login, $password, $level
         // ATTENTION, ON A DEJA $password
@@ -67,6 +70,8 @@ CODESQL;
         if (!empty($tabLigne))  // ON A TROUVE UNE LIGNE
         {
             // https://www.php.net/manual/fr/function.password-verify.php
+            // ATTENTION: $passwordForm EST LE MOT DE PASSE EN CLAIR (DU FORMULAIRE)
+            //              ET $password EST LE MOT DE PASSE HASHE (DE SQL)
             if (password_verify($passwordForm, $password))
             {
                 // OK
