@@ -7,7 +7,8 @@
 class ApiUser
 {
     // PROPRIETE COLLECTIVE
-    static $confirmation = "";
+    static $confirmation    = "";
+    static $cleApi          = "";
 
     // METHODES
     static function login ()
@@ -43,7 +44,11 @@ class ApiUser
                 // => TOKEN D'IDENTIFICATION
                 // ET ENSUITE LE VISITEUR POURRA UTILISER CE BADGE DANS LA PARTIE ADMIN...
                 // (LA PARTIE ADMIN POURRA VERIFIER SI LE BADGE EST VALIDE...)
-
+                if ($level >= 100)
+                {
+                    // ON VA RENVOYER LA CLE API
+                    ApiUser::$cleApi = "TEXTE-SECRET-FOURNI-PAR-LE-LOGIN";
+                }
             }
             else
             {

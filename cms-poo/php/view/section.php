@@ -1,7 +1,7 @@
 
         <section>
             <h2>FORMULAIRE DE LOGIN</h2>
-            <form action="api.php" class="ajax">
+            <form class="ajax">
                 <input type="email" name="email" required placeholder="VOTRE EMAIL">
                 <input type="password" name="password" required placeholder="VOTRE PASSWORD">
                 <button>SE CONNECTER</button>
@@ -22,6 +22,7 @@ mc.start = function ()
     console.log("START EN COURS...");
 
     // ON VA PASSER LES FORMULAIRE QUI ONT LA CLASSE ajax EN MODE AJAX
+    // (ON PEUT AVOIR PLUSIEURS FORMULAIRES SUR LA MEME PAGE =>querySelectorAll)
     var listeSelection = document.querySelectorAll('form.ajax');
     listeSelection.forEach(function (balise) {
         balise.addEventListener('submit', mc.cbAjax);
@@ -47,6 +48,14 @@ mc.cbAjax = function (event)
     })
     .then(function (json) {
         console.log(json);
+
+        // JE PEUX RECUPERER LA CLE API
+        if ('cleApi' in json)
+        {
+            // ON VA LE MEMORISER DANS sessionStorage
+            sessionStorage.setItem('cleApi', json.cleApi);
+        }
+
     });
 }
 
