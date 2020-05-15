@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ETAPE 2: ON DEFINIT LA ZONE D'ACTION -->
+    <div id="app">
+        {{ message }}
+        <button @click="faireUnTruc">CLIQUER ICI</button>
+        <button @click="direBonjour">COUCOU</button>
+    </div>
+
+    <!-- ETAPE 1: JE RAJOUTE LE SCRIPT DE VUEJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- JE RAJOUTE MON CODE JS -->
+    <script>
+// POO CLASSIQUE EN JS
+// ON INSTANCIE UN OBJET app DE LA CLASSE Vue
+
+var mesMethodes = 
+{
+    faireUnTruc: function () 
+    {
+        console.log(this.message);
+    },
+    direBonjour: function ()
+    {
+        alert('COUCOU');
+    }
+}
+
+var mesData = 
+{
+    message: 'Hello Vue!'
+}
+
+var mesParametres = 
+{
+    el:         '#app', // el => element => getElementById
+    data:       mesData,
+    methods:    mesMethodes
+}
+
+// ATTENTION: mesMethodes SERT JUSTE A RANGER MON CODE
+// JE NE PEUX APPELER LA METHODE faireUnTruc A TRAVERS L'OBJET mesMethodes
+// mesMethodes.faireUnTruc(); // undefined CAR L'OBJET mesMethodes N'A PAS DE PROPRIETE message
+
+// app EST UNE VARIABLE JS QUI A COMME VALEUR UN OBJET DE LA CLASSE Vue
+// LA VARIABLE JS app PERMET D'AGIR SUR LA BALISE HTML #app
+var app = new Vue(mesParametres);
+
+// VUEJS COPIE LA METHODE DANS L'OBJET app
+app.faireUnTruc();      // Hello Vue!
+
+    </script>
+</body>
+</html>

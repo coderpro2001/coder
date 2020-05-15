@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// EN JS, C'EST PLUS SIMPLE, JE PEUX CREER UN OBJET DIRECTEMENT
+var user = {};  // OBJET VIDE
+// ET JE PEUX LE REMPLIR ENSUITE
+// PROPRIETE D'OBJET
+user.login = "login13";
+user.password = "coucou13";
+
+// METHODE D'OBJET
+user.getLogin = function () 
+{
+    return this.login;
+}
+
+var user2 = 
+{
+    login: "marseille13",
+    password: "bonjour13"
+};
+
+console.log("propriete")
+console.log(user.login);
+console.log(user2.login);
+
+console.log("methode")
+console.log(user.getLogin());
+
+// EXEMPLE UN PEU PLUS BIZARRE
+// ON PEUT CREER UN OBJET POUR RANGER NOTRE CODE (BASE DE LA POO)
+var moncode = {};
+moncode.getPassword = function ()
+{
+    // ??? MAIS DANS moncode, IL N'Y A PAS DE PROPRIETE password ???
+    // DEBUG
+    // console.log(this);
+    // console.log(this.password);
+
+    return this.password;
+}
+
+console.log(moncode);
+console.log(moncode.getPassword()); 
+// JS FAIT this = moncode
+// JE VAIS AVOIR UN PROBLEME...
+// ON OBTIENT undefined CAR DANS moncode, IL N'Y A PAS DE PROPRIETE password
+
+// MAIS ON PEUT COPIER LA METHODE DANS LES AUTRES OBJETS...
+// (PARCE UNE FONCTION/METHODE EN JS EST UNE VALEUR... ET UNE VALEUR PEUT SE COPIER)
+
+user.getPassword = moncode.getPassword;
+// COMME J'AI RAJOUTE UNE METHODE DANS user
+// JE PEUX APPELER CETTE METHODE
+console.log(user);
+console.log(user.getPassword());            // coucou13
+
+user2.getPassword = moncode.getPassword;
+console.log(user2);
+console.log(user2.getPassword());           // bonjour13
+
+// JE PEUX CREER UN OBJET AVEC SEULEMENT DES PROPRIETES
+user3 = 
+{
+    login: 'super13',
+    password: 'mdp13',
+}
+// ET DANS UN 2E TEMPS, JE PEUX RAJOUTER LA METHODE getPassword
+user3.getPassword = moncode.getPassword;
+// ET ENSUITE, SUR user3 JE PEUX UTILISER LA METHODE getPassword
+console.log(user3.getPassword());
+
+    </script>
+</body>
+</html>

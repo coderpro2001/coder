@@ -6,36 +6,50 @@
     <title>TODOLIST LH</title>
     <style>
 html, body {
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
     font-size:16px;
 }
 * {
     box-sizing: border-box;
 }
-
+h1, h2, h3 {
+    padding:0.5rem;
+    text-align:center;
+    margin:0;
+}
 form {
     display: flex;
     flex-direction: column;
+    width:100%;
+    padding:1rem;
 }        
 form > * {
     margin: 0.2rem;
     padding: 0.2rem;
+    font-family: monospace;
+    width:100%;
 }
 
 .listTodo {
     display:flex;
     flex-wrap: wrap;
     width:100%;
+    justify-content: center;
 }
 .listTodo article {
     border:1px solid #aaaaaa;
-    padding: 0.2rem;
-    margin:0.2rem;
-    width: calc(100% / 3 - 0.4rem); /* IL FAUT ENLEVER LE MARGIN */
+    padding: 0.25rem;
+    margin:0.25rem;
+    width: calc(100% / 3 - 0.5rem); /* IL FAUT ENLEVER LE MARGIN */
+    min-width:200px;
 }
 
 article img {
     width:100%;
-    height:30vh;
+    height:15vh;
     object-fit:cover;
 }
 
@@ -48,6 +62,30 @@ article.done {
 article.ongoing {
     background-color: orange;
 }
+
+article {
+    transition: all 0.5s;
+}
+article:hover {
+    border:1px solid #ffffff;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.8);
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+}
+
+body > * {
+    max-width:960px;
+}
+
+.cache {
+    display: none;
+}
     </style>
 </head>
 <body>
@@ -55,6 +93,7 @@ article.ongoing {
         <h1>MA TODOLIST LH</h1>
     </header>
     <main>
+
         <section>
             <h2>FORMULAIRE DE CREATION (CREATE)</h2>
             <form class="ajax" action="" method="POST">
@@ -77,11 +116,60 @@ article.ongoing {
                 <!-- temporaire en attendant upload... -->
                 <input type="text" name="photo" required placeholder="entrez la photo">
                 <button type="submit">CREER UNE TACHE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="create">
+            </form>
+        </section>
+
+        <section>
+            <h2>FORMULAIRE DE MODIFICATION (UPDATE)</h2>
+            <form class="ajax update" action="" method="POST">
+                <input type="text" name="titre" required placeholder="entrez le titre">
+                <textarea name="description" cols="60" rows="5" required placeholder="entrez la description"></textarea>
+                
+                <label>
+                    <input type="radio" name="statut" value="todo" required placeholder="entrez le statut">
+                    <span>todo</span>
+                </label>
+                <label>
+                    <input type="radio" name="statut" value="ongoing" required placeholder="entrez le statut">
+                    <span>ongoing</span>
+                </label>
+                <label>
+                    <input type="radio" name="statut" value="done" required placeholder="entrez le statut">
+                    <span>done</span>
+                </label>
+
+                <!-- temporaire en attendant upload... -->
+                <input type="text" name="photo" placeholder="entrez la photo">
+
+                <!-- IMPORTANT NE PAS OUBLIER L'ID DE LA LIGNE -->
+                <input type="hidden" name="id" required placeholder="id de la ligne">
+
+                <button type="submit">MODIFIER UNE TACHE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="update">
+            </form>
+        </section>
+
+        <section class="cache">
+            <h2>FORMULAIRE DE DELETE</h2>
+            <form class="ajax delete" action="">
+                <input type="number" name="id" required placeholder="id de la ligne">
+                <button type="submit">SUPPRIMER LA LIGNE</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="delete">
             </form>
         </section>
 
         <section>
             <h2>AFFICHAGE DES TACHES (READ)</h2>
+            <!-- FORMULAIRE POUR RAFRAICHIR LA LISTE DES TACHES -->
+            <form class="ajax read" action="" method="POST">
+                <button type="submit">RAFRAICHIR LA LISTE DES TACHES</button>
+                <!-- ON AJOUTE UNE INFO NON VISIBLE AU VISITEUR MAIS QUI SERA ENVOYEE AU SERVEUR -->
+                <input type="hidden" name="identifiantFormulaire" value="read">
+            </form>
             <div class="listTodo">
                 <!--
                 <article>
@@ -128,7 +216,27 @@ article.ongoing {
 // => CODE EN ATTENTE
 // POUR SAVOIR QUE CETTE FONCTION CALLBACK A UN PARAMETRE => DOC DE JS...
 
-var formulaire = document.querySelector("form.ajax");
+// PB: querySeclector NE PERMET DE SELECTIONNER QU'UNE SEULE BALISE
+// MAIS MAINTENANT, ON A PLUSIEURS FORMULAIRES EN AJAX
+// var formulaire = document.querySelector("form.ajax");
+
+// ON DEFINIT LE TABLEAU ICI
+var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
+
+var listeFormulaire = document.querySelectorAll("form.ajax");
+// ON FAIT UNE BOUCLE POUR AGIR SUR CHAQUE FORMULAIRE UN PAR UN
+listeFormulaire.forEach(function(formulaire){
+    // POUR CHAQUE FORMULAIRE
+    // ON VA BLOQUER LE FONCTIONNEMENT CLASSIQUE
+    // ET ON VA ENVOYER LES INFOS PAR AJAX
+    formulaire.addEventListener("submit", envoyerFormulaireAjax);
+});
+
+// QUAND ON CHARGE LA PAGE
+// ON VA AUTOMATIQUEMENT DECLENCHER LE CLICK SUR LE FORMULAIRE read
+// => CA EVITE AU VISITEUR DE LE FAIRE
+document.querySelector("form.read button[type=submit]").click();
+
 // LA FONCTION envoyerFormulaireAjax SERA APPELEE PAR JS (PAS PAR MOI)
 //      (ET JS FOURNIRA LE PARAMETRE event...)
 // QUAND IL SE PRODUIRA L'EVENEMENT submit SUR LE FORMULAIRE
@@ -162,7 +270,11 @@ function envoyerFormulaireAjax (event)
     // LA FONCTION fetch DE JS ENVOIE UNE REQUETE AJAX VERS api-ajax.php (le premier paramètre)
     fetch("api-ajax.php", contenuForm)
     // POUR LE READ IL FAUT COMPLETER LE CODE POUR RECUPERER LES DONNEES RENVOYEES PAR LE SERVEUR
-    .then(function(responseServer){
+    .then(function(responseServer) {
+        // DEBUG
+        console.log(responseServer);
+
+        // EXTRAIRE UN OBJET JS DEPUIS LA REPONSE DU SERVEUR
         return responseServer.json();
     })
     .then(function(objetJSON) {
@@ -177,30 +289,109 @@ function envoyerFormulaireAjax (event)
             tableauArticle = objetJSON.tableauArticle;
             // => CE TABLEAU JSON SERA EN FAIT FOURNI PAR LE SERVEUR WEB (PHP + TABLE SQL)
             // => LES PROPRIETES SERONT CONSTRUITES A PARTIR DES NOMS DES COLONNES SQL
+            rafraichirListeArticle();
 
-            for(var indice=0; indice < tableauArticle.length; indice++)
-            {
-                var article = tableauArticle[indice];
-                var codeHTML = 
-                `
-                            <article class="${article.statut}">
-                                <h3>${article.titre}</h3>
-                                <p>${article.description}</p>
-                                <p>${article.statut}</p>
-                                <p>${article.id}</p>
-                                <img src="${article.photo}">
-                            </article>
-                `;
-                // AJOUTER DANS LA BALISE listTodo
-                var baliseListTodo = document.querySelector(".listTodo");
-                baliseListTodo.innerHTML += codeHTML;
-            }
         }
     })
     ;
 
 };
-formulaire.addEventListener("submit", envoyerFormulaireAjax);
+
+
+// PROGRAMMATION FONCTIONNELLE
+// => JE RANGE MON CODE DANS DES FONCTIONS
+
+function rafraichirListeArticle ()
+{
+    // ON REMET LA LISTE A ZERO
+    var baliseListTodo = document.querySelector(".listTodo");
+    baliseListTodo.innerHTML = '';
+
+    for(var indice=0; indice < tableauArticle.length; indice++)
+    {
+        var article = tableauArticle[indice];
+        var codeHTML = 
+        `
+                    <article class="${article.statut}">
+                        <h3>${article.titre}</h3>
+                        <p>${article.description}</p>
+                        <p>${article.statut}</p>
+                        <p>${article.id}</p>
+                        <img src="${article.photo}">
+                        <button class="update" data-indice="${indice}" data-id="${article.id}">modifier</button>
+                        <button class="delete" data-id="${article.id}">supprimer</button>
+                    </article>
+        `;
+        // AJOUTER DANS LA BALISE listTodo
+        baliseListTodo.innerHTML += codeHTML;
+    }
+
+    // CHRONOLOGIE: 
+    // JE DOIS ATTENDRE QUE LES BOUTONS SOIENT RAJOUTES AVEC LES ARTICLES
+    // ET ENSUITE JE PEUX AJOUTER LES EVENT LISTENER DESSUS
+
+    // UNE FOIS QU'ON A CREE LES ARTICLES AVEC LES BOUTONS SUPPRIMER
+    // ON VA AJOUTER UN EVENT LISTENER SUR CHAQUE BOUTON
+    var listeBoutonSupprimer = document.querySelectorAll(".listTodo button.delete");
+    listeBoutonSupprimer.forEach(function(bouton) {
+        bouton.addEventListener("click", supprimerLigne);
+    });
+
+
+    var listeBoutonModifier = document.querySelectorAll(".listTodo button.update");
+    listeBoutonModifier.forEach(function(bouton) {
+        bouton.addEventListener("click", modifierLigne);
+    });
+
+}
+
+
+function modifierLigne (event)
+{
+    // DEBUG
+    console.log(event.target);
+    var bouton = event.target;
+    // JE RECUPERE indice CORRESPONDANT DANS tableauArticle
+    var indice = bouton.getAttribute("data-indice");
+    var article = tableauArticle[indice];
+    // DEBUG
+    console.log(article);
+
+    // MAINTENANT IL FAUT COPIER LES INFOS DANS LE FORMULAIRE UPDATE
+    // id, titre, description, statut, photo
+    document.querySelector("form.update input[name=id]").value = article.id;
+    document.querySelector("form.update input[name=titre]").value = article.titre;
+    document.querySelector("form.update textarea[name=description]").value = article.description;
+    document.querySelector("form.update input[name=photo]").value = article.photo;
+
+    // PB: COMME ON UTILISE 3 BALISES radio POUR LE STATUT... CA NE MARCHE PAS COMME POUR LES text...
+    // document.querySelector("form.update input[name=statut]").value = article.statut;
+    // => IL FAUT CHOISIR LA BONNE BALISE ET LUI RAJOUTER L'ATTRIBUT checked
+    // ASTUCE: JE VAIS ME SERVIR DE article.statut POUR CONSTRUIRE LE SELECTEUR DE LA BONNE BALISE radio
+    // "form.update input[value=todo]"
+    // "form.update input[value=ongoing]"
+    // "form.update input[value=done]"
+    var selecteurRadio = "form.update input[value=" + article.statut + "]";
+    // JE SELECTIONNE EN CSS LA BONNE BALISE radio ET JE LA CHECK EN HTML
+    document.querySelector(selecteurRadio).checked = true;
+}
+
+// FONCTION DE CALLBACK SUR LE CLICK DU BOUTON SUPPRIMER
+function supprimerLigne (event)
+{
+    // DEBUG
+    console.log(event.target);
+    var bouton = event.target;
+    // JE RECUPERE id DE LA LIGNE A SUPPRIMER
+    var id = bouton.getAttribute("data-id");
+    // ET JE COPIE id DANS LE FORMULAIRE
+    var inputId = document.querySelector("form.delete input[name=id]");
+    inputId.value = id;
+
+    // MAINTENANT ON VA DECLENCHER L'ENVOI DU FORMULAIRE DE DELETE
+    // document.querySelector("form.delete").submit(); // ENVOI SANS AJAX
+    document.querySelector("form.delete button[type=submit]").click();
+}
 
 /*
 // VERSION 2: FONCTION ANONYME
@@ -248,7 +439,6 @@ var tableauArticle = [
 */
 
 
-var tableauArticle = [];    // CE SERA LE SERVEUR QUI VA ME CONSTRUIRE CE TABLEAU
 
 
     </script>
