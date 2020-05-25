@@ -1,6 +1,6 @@
 <?php
 
-
+$extension = "";
 $uri = $_SERVER["REQUEST_URI"];
 extract(pathinfo($uri));
 // => CREE $filename ET $extension
@@ -27,8 +27,12 @@ $codeHTML = ob_get_clean();
 // $codeHTML = str_replace("h1", "h6", $codeHTML);
 $codeHTML = str_replace("titre1", "LE TITRE DU SITE", $codeHTML);
 
-// JE PEUX SAUVEGARDER LE CODE HTML DE LA PAGE DANS UN FICHIER
-file_put_contents("$filename.$extension", $codeHTML);
+// PROTECTION POUR NE PAS ECRASER LES FICHIERS .php
+if ($extension == "html")
+{
+    // JE PEUX SAUVEGARDER LE CODE HTML DE LA PAGE DANS UN FICHIER
+    file_put_contents("$filename.$extension", $codeHTML);
+}
 
 // SI JE VEUX AFFICHER LE RESULTAT
 echo $codeHTML;
