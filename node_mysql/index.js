@@ -2,7 +2,12 @@
 // on importe le framework express
 const express = require("express");
 
-// on importe mysql
+// on importe la méthode json dans le module body-parser de node
+// cette méthode va permettre de transformer des données au format json en objet javascript
+// https://www.npmjs.com/package/body-parser
+const { json } = require("body-parser");
+
+// on importe le package mysql
 const mysql = require("mysql");
 
 // on intialise la connection à la db
@@ -35,7 +40,7 @@ app.get("/", (request, response) => {
 });
 
 // on va créer une route qui va nous permettre de récupérer les users de notre database et de les afficher en console
-app.get("/api/users", (request, response) => {
+app.get("/users", (request, response) => {
   // c'est ici qu'on va écrire le code qui va nous permettre de faire la requête à la bdd
   const sql = "SELECT * FROM user";
 
@@ -85,6 +90,32 @@ app.delete("/users/:id", (request, response) => {
     }
     response.status(200);
     response.send(`Utilisateur ${id} supprimé`);
+  });
+});
+
+// on va créer une route permettant d'insérer un nouvel utilisateur dans la bdd
+// ici on utilise la fonction json() qu'on a importée. Cette fonction est un middleware (une fonction qui sera exécutée systématiquement entre le moment ou la requête arrive au serveur et le moment où la réponse est envoyée)
+// pour notre route, a chaque fois que le serveur recevra une requête en POST sur /users, il exécutera json() pour transformer le json reçu en js, ensuite la fonction callback sera exécutée
+app.post("/users", json(), (request, response) => {
+  // création d'un user pour tester la route
+  // const user = {
+  //   name: "Zakaria",
+  //   email: "zak@gmail.com",
+  // };
+
+  // on récupère la valeur de la propriété body de la requête
+  // elle va contenir les données d'un formulaire de création d'un user
+  const user = request.body;
+
+  const sql = "INSERT INTO user SET ?";
+
+  connection.query(sql, [user], (err, rows) => {
+    if (err) {
+      response.status(500);
+      response.send("Erreur enregistrement utilisateur");
+    }
+    response.status(200);
+    response.send(`Utilisateur créé, ${rows.affectedRows} modifiés`);
   });
 });
 
