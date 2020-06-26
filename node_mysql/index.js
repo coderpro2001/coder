@@ -119,6 +119,11 @@ app.post("/users", json(), (request, response) => {
   });
 });
 
+app.post("/test", (req, res) => {
+  // request = JSON.parse(req.body);
+  console.log(req.body);
+});
+
 // on ve dire au serveur d'écouter les requêtes entrantes
 app.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);
