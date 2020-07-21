@@ -20,7 +20,7 @@
       // pour ça on va utiliser l'API ipify (gratuite) qui va récupérer notre adresse ip
       fetch("https://api.ipify.org?format=json")
         // version javascript classique
-        .then(function(response) {
+        .then(function (response) {
           // on récupère la réponse et on la formatte en objet javascript
           return response.json();
         })
@@ -32,7 +32,7 @@
 
         // .then(response => response.json())
 
-        .then(function(data) {
+        .then(function (data) {
           // une fois qu'on a notre objet js, on peut accéder à ses propriétés
           // on récupère la valeur de la propriété ip de l'objet data et on le stocke dans une variable qu'on utilisera dans notre prochain call API
           const ip = data.ip;
@@ -54,11 +54,11 @@
               ip +
               "?access_key=30c029b1d2a8dcddf26ac5a0e07b914"
           )
-            .then(function(response) {
+            .then(function (response) {
               // on récupère la réponse et on la formatte en objet javascript
               return response.json();
             })
-            .then(function(data) {
+            .then(function (data) {
               // on accède à la propriété city de l'objet data et on stocke sa valeur dans une variable
               let city = data.city;
 
@@ -77,11 +77,11 @@
               fetch(
                 `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8e602b9ea28ed4f9f8fc97a5f6d1105c&lang=fr&units=metric`
               )
-                .then(function(response) {
+                .then(function (response) {
                   // on transforme la réponse en objet javascript
                   return response.json();
                 })
-                .then(function(data) {
+                .then(function (data) {
                   // on récupère un objet js, on peut maintenant accéder à ses propriétés
                   // debug
                   console.log(data);
